@@ -9,9 +9,9 @@
   
   <body>
     <h1>Gym Panda</h1>
-    <button type="button" onclick="addRow()">+</button>
+    <button type="button" id="addRow">+</button>
       <div class="table-wrapper">
-        <table>
+        <table id="workoutTable">
             <thead>
                 <tr>
                     <th rowspan="2">Workout</th>
@@ -26,16 +26,16 @@
                   <th>Kilograms(KGS)</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr id="workoutRecord">
-                  <td contenteditable="true"><input type="text" class="form-control" placeholder="Name of workout"></td>
-                  <td contenteditable="true"><input type="text" class="form-control" placeholder="Body Part"></td>
-                  <td contenteditable="true"><input type="number" class="form-control" placeholder="LB"></td>
-                  <td contenteditable="true"><input type="number" class="form-control" placeholder="KG"></td>
-                  <td contenteditable="true"><input type="number" class="form-control" placeholder="# of reps"></td>
-                  <td contenteditable="true"><input type="number" class="form-control" placeholder="# of sets"></td>
-                  <td contenteditable="true"><input type="date" class="form-control" placeholder="Date Achieved"></td>
-                </tr>
+            <tbody id="tableBody">
+              <tr>
+                <td contenteditable="true"><input type="text" class="form-control" placeholder="Name of workout"></td>
+                <td contenteditable="true"><input type="text" class="form-control" placeholder="Body Part"></td>
+                <td contenteditable="true"><input type="number" class="form-control" placeholder="LB"></td>
+                <td contenteditable="true"><input type="number" class="form-control" placeholder="KG"></td>
+                <td contenteditable="true"><input type="number" class="form-control" placeholder="# of reps"></td>
+                <td contenteditable="true"><input type="number" class="form-control" placeholder="# of sets"></td>
+                <td contenteditable="true"><input type="date" class="form-control" placeholder="Date Achieved"></td>
+              </tr>
             </tbody>
         </table>
       </div>
