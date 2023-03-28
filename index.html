@@ -10,28 +10,27 @@
   <body>
     <h1>Gym Panda</h1>
     <button type="button" id="addRow">+</button>
-      <div class="table-wrapper">
-        <table id="workoutTable">
-            <thead>
-                <tr>
-                    <th rowspan="2">Workout</th>
-                    <th rowspan="2">Part Worked</th>
-                    <th colspan="2">Personal Record Weight</th>
-                    <th rowspan="2">Reps</th>
-                    <th rowspan="2">Set</th>
-                    <th rowspan="2">Date Achieved</th>
-                </tr>
-                <tr>
-                  <th>Pounds(LBS)</th>
-                  <th>Kilograms(KGS)</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
+    <button type="button" id="delRow">-</button>
+    <div class="table-wrapper">
+      <table id="workoutTable">
+          <thead>
               <tr>
+                  <th rowspan="2">Workout</th>
+                  <th rowspan="2">Part Worked</th>
+                  <th colspan="2">Personal Record Weight</th>
+                  <th rowspan="2">Reps</th>
+                  <th rowspan="2">Set</th>
+                  <th rowspan="2">Date Achieved</th>
               </tr>
-            </tbody>
-        </table>
-      </div>
+              <tr>
+                <th>Pounds(LBS)</th>
+                <th>Kilograms(KGS)</th>
+              </tr>
+          </thead>
+          <tbody id="tableBody">
+          </tbody>
+      </table>
+    </div>
     <script src="/table-ops.js"></script>
   </body>
 </html>
