@@ -12,11 +12,17 @@ addRowId.addEventListener("click", function() {
     // Create 7 cells for the row
     const exercise = newRow.insertCell(0);
     const partWorked = newRow.insertCell(1);
+    const weightPounds = newRow.insertCell(2);
+    const weightKilograms = newRow.insertCell(3);
+    const reps = newRow.insertCell(4);
+    const sets = newRow.insertCell(5);
+    const date = newRow.insertCell(6);
 
     // allow input for exercise name
-    const exercise_input = document.createElement("input");
-    exercise_input.type = "text";
-    exercise.appendChild(exercise_input);
+    const exerciseInput = document.createElement("input");
+    exerciseInput.type = "text";
+    exerciseInput.placeholder = "exercise name";
+    exercise.appendChild(exerciseInput);
 
     // create select dropdown for body parts, 7 in total
     const selectBodypart = document.createElement("select");
@@ -24,7 +30,7 @@ addRowId.addEventListener("click", function() {
     // initial state
     const option1 = document.createElement("option");
     option1.value = "";
-    option1.text = "-- Select bodypart worked --";
+    option1.text = "-- bodypart worked --";
     selectBodypart.appendChild(option1);
 
     // Shoulders option
@@ -65,18 +71,39 @@ addRowId.addEventListener("click", function() {
 
     partWorked.appendChild(selectBodypart);
 
-    // Create remaining cells 5 / 7
-    for (let i = 2; i < 7; i++) {
-        const newCell = newRow.insertCell(i);
-        let newData = document.createElement("input");
-        if (i < 6) { // weights, reps, and sets (numbers)
-            newData.type = "number";
-            newData.required = true;
-        } else { // data achieved (date)
-            newData.type = "date";
-        }
-        newCell.append(newData); // add the data into their respective column
-    }
+    // allow input for weight (pounds)
+    const weightLbInput = document.createElement("input");
+    weightLbInput.name = "weight_lbs";
+    weightLbInput.type = "number";
+    weightLbInput.placeholder = "lbs lifted";
+    weightPounds.appendChild(weightLbInput);
+
+    // allow input for weight (kilograms)
+    const weightKgInput = document.createElement("input");
+    weightKgInput.name = "weight_kgs";
+    weightKgInput.type = "number";
+    weightKgInput.placeholder = "kgs lifted";
+    weightKilograms.appendChild(weightKgInput);
+
+    // allow input for rep count
+    const repsInput = document.createElement("input");
+    repsInput.name = "reps";
+    repsInput.type = "number";
+    repsInput.placeholder = "rep count";
+    reps.appendChild(repsInput);
+
+    // allow input for set count
+    const setsInput = document.createElement("input");
+    setsInput.name = "sets";
+    setsInput.type = "number";
+    setsInput.placeholder = "set count";
+    sets.appendChild(setsInput);
+
+    // allow input for data achieved
+    const dateInput = document.createElement("input");
+    dateInput.name = "date_achieved";
+    dateInput.type = "date";
+    date.appendChild(dateInput);
 });
 
 // get the id for the delete row button (-)
