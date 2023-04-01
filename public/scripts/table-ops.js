@@ -1,11 +1,11 @@
-// get the id of the add row button (+)
-const addRowId = document.getElementById("addRow");
-
 // get the id of the table we want to modify
 const workoutTable = document.getElementById("tableBody");
 
+// get the id of the add row button (+)
+const addRowId = document.getElementById("addRow");
+
 // add eventListener when the button is clicked to add a row
-addRowId.addEventListener("click", function() {
+addRowId.addEventListener("click", () => {
     // adds a row to the bottom of the table
     const newRow = workoutTable.insertRow(-1);
     
@@ -17,6 +17,7 @@ addRowId.addEventListener("click", function() {
     const reps = newRow.insertCell(4);
     const sets = newRow.insertCell(5);
     const date = newRow.insertCell(6);
+    const buttons = newRow.insertCell(7);
 
     // allow input for exercise name
     const exerciseInput = document.createElement("input");
@@ -104,12 +105,22 @@ addRowId.addEventListener("click", function() {
     dateInput.name = "date_achieved";
     dateInput.type = "date";
     date.appendChild(dateInput);
+
+    // Create the submit and delete button cell
+    const submitButton = document.createElement("button");
+    submitButton.textContent = "✓";
+    buttons.appendChild(submitButton);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "✗";
+    // deleteButton.classList.add("delRow");
+    buttons.appendChild(deleteButton);
 });
 
 // get the id for the delete row button (-)
-const delRowId = document.getElementById("delRow");
+const delRow = document.getElementById("delRow");
 
 // adds eventlistener to delete the bottommost row
-delRowId.addEventListener("click", function() {
-   workoutTable.deleteRow(-1);
+delRow.addEventListener('click', () => {
+    workoutTable.deleteRow(-1);
 });
