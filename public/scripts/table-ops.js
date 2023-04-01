@@ -25,13 +25,20 @@ addRowId.addEventListener("click", () => {
     exerciseInput.placeholder = "exercise name";
     exercise.appendChild(exerciseInput);
 
+    // create label for select
+    const labelSelectBodypart = document.createElement("label");
+    labelSelectBodypart.setAttribute('for', 'body-select');
+    labelSelectBodypart.textContent = "body part: ";
+    partWorked.appendChild(labelSelectBodypart);
+
     // create select dropdown for body parts, 7 in total
     const selectBodypart = document.createElement("select");
+    selectBodypart.id = "body-select";
     
     // initial state
     const option1 = document.createElement("option");
     option1.value = "";
-    option1.text = "-- bodypart worked --";
+    option1.text = "";
     selectBodypart.appendChild(option1);
 
     // Shoulders option
@@ -108,19 +115,23 @@ addRowId.addEventListener("click", () => {
 
     // Create the submit and delete button cell
     const submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.name = "submitExcercise";
     submitButton.textContent = "✓";
     buttons.appendChild(submitButton);
 
     const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.classList.add("delRow");
     deleteButton.textContent = "✗";
-    // deleteButton.classList.add("delRow");
     buttons.appendChild(deleteButton);
 });
 
-// get the id for the delete row button (-)
-const delRow = document.getElementById("delRow");
-
-// adds eventlistener to delete the bottommost row
-delRow.addEventListener('click', () => {
-    workoutTable.deleteRow(-1);
+// add event listener for each button at end of row to delete row
+workoutTable.addEventListener('click', () => {
+    const target = event.target;
+    if (target.classList.contains('delRow')) {
+        const row = target.parentNode.parentNode;
+        row.remove();
+    }
 });
