@@ -13,39 +13,46 @@ app.use(bodyParser.json());
 
 // retrieve web pages for the user
 // Route to main page
-app.get('/', (request, response) => {
+app.get('/', (req, res) => {
     response.sendFile(__dirname + '/index.html');
 });
 
 // Route to login page
-app.get('/login', (request, response) => {
+app.get('/login', (req, res) => {
     response.sendFile(__dirname + '/login.html');
 });
 
 // Route to login page
-app.get('/signup', (request, response) => {
+app.get('/signup', (req, res) => {
     response.sendFile(__dirname + '/signup.html');
 });
 
 /* Handle users' sent data */
 // Handle login post request
-app.post('/login', (require, response) => {
-  const {username, password} = require.body;
+app.post('/login', (req, res) => {
+  const {username, password} = req.body;
   const sqlQuery = `SELECT * FROM users WHERE username = '${username}' AND pass = '${password}'`;
 
   db.query(sqlQuery, (err, result) => {
     if (err) throw err;
     if (result.length > 0) { // valid (found in database)
-      response.send('Login successful');
+      res.send('Login successful');
     } else { // not found in database
-      response.send('Invalid username or password');
+      res.send('Invalid username or password');
     }
   });
 });
 
 // Handle signup post request
-app.post('sign-up', (require, response) => {
-    // const {username, password, email, sex, bodyweight, feet, inches} = require.body;
+app.post('/sign-up', (req, res) => {
+    const {username, password, email, sex, weight, feet, inches} = req.body;
+    
+    // Validate every field was filled
+    if (!username || !password || !email || !sex || !weight || !feet || !inches) {
+      return res.status(400).json({ message: "Missing fields." });
+    } else {
+      console.log("Correct");
+    }
 }); 
 
 // Starts the server
