@@ -9,11 +9,11 @@
         <h1>Sign Up</h1>
         <form action="/sign-up" method="post">
             <label for="username"></label>
-            <input type="text" id="username" name="username" placeholder="Username"><br>
+            <input type="text" id="username" name="username" placeholder="Username" required><br>
             <label for="password"></label>
-            <input type="password" id="password" name="password" placeholder="Password"><br>
+            <input type="password" id="password" name="password" placeholder="Password" required><br>
             <label for="email"></label>
-            <input type="email" id="email" name="email" placeholder="Email Address"><br>
+            <input type="email" id="email" name="email" placeholder="Email Address" required><br>
             <label for="sex"></label>
             <select name="sex" id="sex">
                 <option value="">Sex</option>
@@ -21,11 +21,11 @@
                 <option value="F">Female</option>
             </select><br>
             <label for="body-weight"></label>
-            <input type="number" id="body-weight" name="body-weight" placeholder="Body Weight (LBS)"><br>
+            <input type="number" id="body-weight" name="body-weight" placeholder="Body Weight (LBS)" required><br>
             <label for="feet"></label>
-            <input type="number" id="feet" name="feet" placeholder="Feet">
+            <input type="number" id="feet" name="feet" placeholder="Feet" required>
             <label for="inches"></label>
-            <input type="number" id="inches" name="inches" placeholder="Inches"><br>
+            <input type="number" id="inches" name="inches" placeholder="Inches" required><br>
             <input type="submit" value="Sign Up" id="signup-btn">
         </form>
         <button type="button" id="to-login">Login</button><br>
