@@ -3,6 +3,7 @@ const app = express();
 const db = require('./src/database/db-connection');
 const bodyParser = require('body-parser'); // add module to parse form data
 const bcrypt = require('bcrypt'); // add module for hashing passwords
+const pool = require('./src/database/db-connection');
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -51,6 +52,21 @@ app.post('/sign-up', (req, res) => {
     if (!username || !password || !email || !sex || !weight || !feet || !inches) {
       return res.status(400).json({ message: "Missing fields." });
     } 
+
+    // Add it into the sql database
+    pool.query(
+        'INSERT INTO users (username, password, email, sex, weight, feet, inches) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [username, password, email, sex, weight, feet, inches],
+        (error, result) => {
+          if (error) {
+            console.log(error);
+            res.status(500).send("Error sending to database"); 
+          } else {
+            console.log(result);
+            res.redirect('/');
+          }
+        }
+    );
 }); 
 
 // Starts the server
