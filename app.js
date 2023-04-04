@@ -11,6 +11,7 @@ app.use(express.static('public')); // middleware to serve static files in public
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 
+// retrieve web pages for the user
 // Route to main page
 app.get('/', (request, response) => {
     response.sendFile(__dirname + '/index.html');
@@ -26,6 +27,7 @@ app.get('/signup', (request, response) => {
     response.sendFile(__dirname + '/signup.html');
 });
 
+/* Handle users' sent data */
 // Handle login post request
 app.post('/login', (require, response) => {
   const {username, password} = require.body;
@@ -33,9 +35,9 @@ app.post('/login', (require, response) => {
 
   db.query(sqlQuery, (err, result) => {
     if (err) throw err;
-    if (result.length > 0) {
+    if (result.length > 0) { // valid (found in database)
       response.send('Login successful');
-    } else {
+    } else { // not found in database
       response.send('Invalid username or password');
     }
   });
