@@ -32,16 +32,24 @@ app.get('/signup', (req, res) => {
 // Handle login post request
 app.post('/login', (req, res) => {
   const {username, password} = req.body;
-  const sqlQuery = `SELECT * FROM users WHERE username = '${username}' AND pass = '${password}'`;
-
-  db.query(sqlQuery, (err, result) => {
-    if (err) throw err;
-    if (result.length > 0) { // valid (found in database)
-      res.send('Login successful');
-    } else { // not found in database
-      res.send('Invalid username or password');
+  
+  // query user information
+  pool.query(
+    'SELECT * FROM users WHERE username = ? AND password = ?',
+    [username, password],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error sending to database");
+      } else if (result.length == 0) {
+        // No user is found, redirect to login page with error message
+        res.send('Invalid username or password');
+      } else {
+        console.log('Logged In');
+        res.redirect('/');
+      }
     }
-  });
+  );
 });
 
 // Handle signup post request
@@ -61,8 +69,8 @@ app.post('/sign-up', (req, res) => {
           if (error) {
             console.log(error);
             res.status(500).send("Error sending to database"); 
-          } else {
-            console.log(result);
+          } else { // on successful creation, redirect to main page
+            console.log('Signed Up');
             res.redirect('/');
           }
         }
