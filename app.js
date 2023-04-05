@@ -35,7 +35,7 @@ app.post('/login', (req, res) => {
   
   // query user information
   pool.query(
-    'SELECT * FROM users WHERE username = ? AND password = ?',
+    'SELECT * FROM users WHERE username = ?',
     [username, password],
     (err, result) => {
       if (err) {
@@ -45,8 +45,19 @@ app.post('/login', (req, res) => {
         // No user is found, redirect to login page with error message
         res.send('Invalid username or password');
       } else {
-        console.log('Logged In');
-        res.redirect('/');
+        // get the hashed password from the database
+        const hashedPassword = result[0].password;
+        bcrypt.compare(password, hashedPassword, (err, match) => {
+          if (err) {
+            res.status(500).send("Error comparing passwords");
+          } else if(!match) {
+            res.status(400).send("Wrong password");
+          } else {
+            // on successful login, redirects to main page
+            console.log('Logged In');
+            res.redirect('/');
+          }
+        });
       }
     }
   );
@@ -61,20 +72,36 @@ app.post('/sign-up', (req, res) => {
       return res.status(400).json({ message: "Missing fields." });
     } 
 
-    // Add it into the sql database
-    pool.query(
-        'INSERT INTO users (username, password, email, sex, weight, feet, inches) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [username, password, email, sex, weight, feet, inches],
-        (error, result) => {
-          if (error) {
-            console.log(error);
-            res.status(500).send("Error sending to database"); 
-          } else { // on successful creation, redirect to main page
-            console.log('Signed Up');
-            res.redirect('/');
+    // Hash the password using bcrypt hash function
+    let hashPassword = password;
+    const saltRounds = 12;
+    // generate salt then hash 
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+      bcrypt.hash(password, saltRounds, (err, hash) => {
+          if (err) {
+            console.error("Error hashing passwords: ", err);
+          } else {
+            // successfully hashed password
+            console.log("Hashing successful: ", hash);
+            hashPassword = hash;
+            // Add information into the sql database
+            pool.query(                
+              'INSERT INTO users (username, password, email, sex, weight, feet, inches) VALUES (?, ?, ?, ?, ?, ?, ?)',
+              [username, hashPassword, email, sex, weight, feet, inches],
+               (error, result) => {
+                if (error) {
+                  console.log(error);
+                  res.status(500).send("Error sending to database"); 
+                } else { // on successful creation, redirect to main page
+                  console.log('Signed Up');
+                  console.log(hashPassword);
+                  res.redirect('/');
+                }
+              }
+            );
           }
-        }
-    );
+        });
+    });
 }); 
 
 // Starts the server
