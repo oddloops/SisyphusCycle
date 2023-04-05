@@ -42,10 +42,8 @@ app.post('/login', (req, res) => {
         console.log(err);
         res.status(500).send("Error sending to database");
       } else if (result.length == 0) {
-        // No user is found, redirect to login page with error message
         res.send('Invalid username or password');
       } else {
-        // get the hashed password from the database
         const hashedPassword = result[0].password;
         bcrypt.compare(password, hashedPassword, (err, match) => {
           if (err) {
@@ -53,7 +51,6 @@ app.post('/login', (req, res) => {
           } else if(!match) {
             res.status(400).send("Wrong password");
           } else {
-            // on successful login, redirects to main page
             console.log('Logged In');
             res.redirect('/');
           }
