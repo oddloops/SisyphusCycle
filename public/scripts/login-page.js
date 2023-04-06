@@ -2,5 +2,5 @@
 const toSignUp = document.getElementById("to-signup");
 
 toSignUp.addEventListener('click', () => {
-    window.location.href = '/signup.html';
+    window.location.href = '/signup';
 });
