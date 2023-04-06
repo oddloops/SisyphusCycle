@@ -6,6 +6,7 @@ const addRowId = document.getElementById("addRow");
 
 // add eventListener when the button is clicked to add a row
 addRowId.addEventListener("click", () => {
+
     // adds a row to the bottom of the table
     const newRow = workoutTable.insertRow(-1);
     
@@ -14,7 +15,7 @@ addRowId.addEventListener("click", () => {
     const partWorked = newRow.insertCell(1);
     const weightPounds = newRow.insertCell(2);
     const weightKilograms = newRow.insertCell(3);
-    const reps = newRow.insertCell(4);
+    const repsAmount = newRow.insertCell(4);
     const sets = newRow.insertCell(5);
     const date = newRow.insertCell(6);
     const buttons = newRow.insertCell(7);
@@ -23,17 +24,20 @@ addRowId.addEventListener("click", () => {
     const exerciseInput = document.createElement("input");
     exerciseInput.type = "text";
     exerciseInput.placeholder = "exercise name";
+    exerciseInput.required = true;
     exercise.appendChild(exerciseInput);
 
     // create label for select
     const labelSelectBodypart = document.createElement("label");
     labelSelectBodypart.setAttribute('for', 'body-select');
     labelSelectBodypart.textContent = "body part: ";
+    labelSelectBodypart.required = true;
     partWorked.appendChild(labelSelectBodypart);
 
     // create select dropdown for body parts, 7 in total
     const selectBodypart = document.createElement("select");
     selectBodypart.id = "body-select";
+    selectBodypart.required = true;
     
     // initial state
     const option1 = document.createElement("option");
@@ -84,6 +88,8 @@ addRowId.addEventListener("click", () => {
     weightLbInput.name = "weight_lbs";
     weightLbInput.type = "number";
     weightLbInput.placeholder = "lbs lifted";
+    weightLbInput.min = 0;
+    weightLbInput.required = true;
     weightPounds.appendChild(weightLbInput);
 
     // allow input for weight (kilograms)
@@ -91,27 +97,47 @@ addRowId.addEventListener("click", () => {
     weightKgInput.name = "weight_kgs";
     weightKgInput.type = "number";
     weightKgInput.placeholder = "kgs lifted";
+    weightKgInput.min = 0;
+    weightKgInput.required = true;
     weightKilograms.appendChild(weightKgInput);
 
     // allow input for rep count
     const repsInput = document.createElement("input");
-    repsInput.name = "reps";
+    repsInput.name = "reps_num";
     repsInput.type = "number";
     repsInput.placeholder = "rep count";
-    reps.appendChild(repsInput);
+    repsInput.min = 0;
+    repsInput.required = true;
+    repsAmount.appendChild(repsInput);
 
     // allow input for set count
     const setsInput = document.createElement("input");
     setsInput.name = "sets";
     setsInput.type = "number";
     setsInput.placeholder = "set count";
+    setsInput.min = 0;
+    setsInput.required = true;
     sets.appendChild(setsInput);
 
     // allow input for data achieved
     const dateInput = document.createElement("input");
     dateInput.name = "date_achieved";
     dateInput.type = "date";
+    dateInput.required = true;
     date.appendChild(dateInput);
+
+    // create a new form
+    // const form = document.createElement('form');
+    // form.setAttribute('action', '/table');
+    // form.setAttribute('method', 'post');
+    // form.appendChild(exerciseInput);
+    // form.appendChild(labelSelectBodypart);
+    // form.appendChild(selectBodypart);
+    // form.appendChild(weightLbInput);
+    // form.appendChild(weightKgInput);
+    // form.appendChild(repsInput);
+    // form.appendChild(setsInput);
+    // form.appendChild(dateInput);
 
     // Create the submit and delete button cell
     const submitButton = document.createElement("button");
