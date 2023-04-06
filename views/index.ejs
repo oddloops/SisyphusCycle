@@ -10,7 +10,13 @@
   <body>
     <header>
       <h1 class="site-name">Gym Panda</h1>
-      <button type="button" id="login-btn">Login</button>
+      <% if (userId && username) { %>
+      <form action="/logout" method="POST">
+        <button>Logout</button>
+      </form>
+      <% } else { %>
+        <button type="button" id="login-btn">Login</button>
+      <% } %> 
     </header>
     <button type="button" id="addRow" class="rounded">+</button>
     <!-- <button type="button" id="delRow" class="rounded">-</button> -->
