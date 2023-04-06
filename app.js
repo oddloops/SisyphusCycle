@@ -20,20 +20,26 @@ app.use(session({
   saveUninitialized: false
 }));
 
+// use ejs templating engine
+app.set('view engine', 'ejs');
+
 // retrieve web pages for the user
-// Route to main page
+// Render main page
 app.get('/', (req, res) => {
-  response.sendFile(__dirname + '/index.html');
+  const userId = req.session.userId;
+  const username = req.session.username;
+
+  res.render('index', { userId, username });
 });
 
 // Route to login page
 app.get('/login', (req, res) => {
-  response.sendFile(__dirname + '/login.html');
+  res.render('login');
 });
 
 // Route to login page
 app.get('/signup', (req, res) => {
-  response.sendFile(__dirname + '/signup.html');
+  res.render('signup')
 });
 
 /* Handle users' sent data */
@@ -92,7 +98,6 @@ app.post('/sign-up', (req, res) => {
             console.error("Error hashing passwords: ", err);
           } else {
             // successfully hashed password
-            console.log("Hashing successful: ", hash);
             hashPassword = hash;
             // Add information into the sql database
             pool.query(                
@@ -103,10 +108,10 @@ app.post('/sign-up', (req, res) => {
                   console.log(error);
                   res.status(500).send("Error sending to database"); 
                 } else { // on successful creation, redirect to main page
+                  const row = pool.query('SELECT * FROM users WHERE username = ?', username);
                   // save user id and username to current session
-                  req.session.userId = result[0].id;
+                  req.session.userId = result.insertId;
                   req.session.username = username;
-                  
                   // redirect
                   console.log('Signed Up');
                   res.redirect('/');
