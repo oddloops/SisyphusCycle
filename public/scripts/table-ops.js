@@ -128,22 +128,27 @@ addRowId.addEventListener("click", () => {
 
     // Create the submit and delete button cell
     const submitButton = document.createElement("button");
-    submitButton.type = "submit";
-    submitButton.name = "submitExcercise";
+    submitButton.type = "button";
+    submitButton.name = "submitExercise";
     submitButton.textContent = "✓";
     buttons.appendChild(submitButton);
 
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
-    deleteButton.classList.add("delRow");
+    deleteButton.name = "delRow";
     deleteButton.textContent = "✗";
     buttons.appendChild(deleteButton);
 });
 
-// add event listener for each button at end of row to delete row
+// add event listener for each button to submit data/remove row
 workoutTable.addEventListener('click', () => {
     const target = event.target;
-    if (target.classList.contains('delRow')) {
+
+    if  (target.name === "submitExercise") {
+        
+    }
+    // to delete row
+    if (target.name === "delRow") {
         const row = target.parentNode.parentNode;
         row.remove();
     }
