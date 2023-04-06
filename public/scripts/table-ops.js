@@ -85,7 +85,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for weight (pounds)
     const weightLbInput = document.createElement("input");
-    weightLbInput.name = "weight_lbs";
+    weightLbInput.name = "weight-lbs";
     weightLbInput.type = "number";
     weightLbInput.placeholder = "lbs lifted";
     weightLbInput.min = 0;
@@ -94,7 +94,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for weight (kilograms)
     const weightKgInput = document.createElement("input");
-    weightKgInput.name = "weight_kgs";
+    weightKgInput.name = "weight-kgs";
     weightKgInput.type = "number";
     weightKgInput.placeholder = "kgs lifted";
     weightKgInput.min = 0;
@@ -103,7 +103,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for rep count
     const repsInput = document.createElement("input");
-    repsInput.name = "reps_num";
+    repsInput.name = "reps-num";
     repsInput.type = "number";
     repsInput.placeholder = "rep count";
     repsInput.min = 0;
@@ -121,7 +121,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for data achieved
     const dateInput = document.createElement("input");
-    dateInput.name = "date_achieved";
+    dateInput.name = "date-achieved";
     dateInput.type = "date";
     dateInput.required = true;
     date.appendChild(dateInput);
@@ -149,16 +149,43 @@ workoutTable.addEventListener('click', () => {
         const cells = row.cells;
         const inputs = row.querySelectorAll('input, select');
         const data = {};
+        let inputsFilled = true;
+
+        // get all the inputted data
         inputs.forEach(input => {
-            // empty input
+            // check for empty inputs
             if (!input.value) {
                 alert(`Fill in missing field: ${input.name}`);
+                inputsFilled = false;
                 return;
             }
             data[input.name] = input.value;
         });
-        for (const [key, value] of Object.entries(data)) {
-            console.log(key, value);
+
+        // Send data to server if all inputs are filled
+        if (inputsFilled) {
+            console.log(data);
+            fetch('/exercise-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                // check response from server
+                if (response.ok) {
+                    console.log("Data sent successfully");
+                } else {
+                    console.error("Error sending data");
+                }
+            })
+                .then(data => {
+                console.log('Data successfully submitted');
+            })
+                .catch(error => {
+                console.error('Error: ', error);
+            });
         }
     }
 
