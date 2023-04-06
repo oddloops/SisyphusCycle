@@ -123,6 +123,18 @@ app.post('/sign-up', (req, res) => {
     });
 }); 
 
+// handle logout post request
+app.post('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.clearCookie('connect.sid');
+      res.redirect('/')
+    }
+  });
+});
+
 // Starts the server
 app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
