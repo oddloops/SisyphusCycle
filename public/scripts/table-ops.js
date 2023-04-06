@@ -23,6 +23,7 @@ addRowId.addEventListener("click", () => {
     // allow input for exercise name
     const exerciseInput = document.createElement("input");
     exerciseInput.type = "text";
+    exerciseInput.name = "exercise";
     exerciseInput.placeholder = "exercise name";
     exerciseInput.required = true;
     exercise.appendChild(exerciseInput);
@@ -31,12 +32,11 @@ addRowId.addEventListener("click", () => {
     const labelSelectBodypart = document.createElement("label");
     labelSelectBodypart.setAttribute('for', 'body-select');
     labelSelectBodypart.textContent = "body part: ";
-    labelSelectBodypart.required = true;
     partWorked.appendChild(labelSelectBodypart);
 
     // create select dropdown for body parts, 7 in total
     const selectBodypart = document.createElement("select");
-    selectBodypart.id = "body-select";
+    selectBodypart.name = "boby-select";
     selectBodypart.required = true;
     
     // initial state
@@ -143,13 +143,27 @@ addRowId.addEventListener("click", () => {
 // add event listener for each button to submit data/remove row
 workoutTable.addEventListener('click', () => {
     const target = event.target;
-
+    const row = target.parentNode.parentNode;
+    // to submit row's cell data
     if  (target.name === "submitExercise") {
-        
+        const cells = row.cells;
+        const inputs = row.querySelectorAll('input, select');
+        const data = {};
+        inputs.forEach(input => {
+            // empty input
+            if (!input.value) {
+                alert(`Fill in missing field: ${input.name}`);
+                return;
+            }
+            data[input.name] = input.value;
+        });
+        for (const [key, value] of Object.entries(data)) {
+            console.log(key, value);
+        }
     }
+
     // to delete row
     if (target.name === "delRow") {
-        const row = target.parentNode.parentNode;
         row.remove();
     }
 });
