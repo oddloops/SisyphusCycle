@@ -126,19 +126,6 @@ addRowId.addEventListener("click", () => {
     dateInput.required = true;
     date.appendChild(dateInput);
 
-    // create a new form
-    // const form = document.createElement('form');
-    // form.setAttribute('action', '/table');
-    // form.setAttribute('method', 'post');
-    // form.appendChild(exerciseInput);
-    // form.appendChild(labelSelectBodypart);
-    // form.appendChild(selectBodypart);
-    // form.appendChild(weightLbInput);
-    // form.appendChild(weightKgInput);
-    // form.appendChild(repsInput);
-    // form.appendChild(setsInput);
-    // form.appendChild(dateInput);
-
     // Create the submit and delete button cell
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
