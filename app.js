@@ -4,6 +4,7 @@ const db = require('./src/database/db-connection');
 const bodyParser = require('body-parser'); // add module to parse form data
 const bcrypt = require('bcrypt'); // add module for hashing passwords
 const pool = require('./src/database/db-connection');
+const session = require('express-session');
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -12,20 +13,27 @@ app.use(express.static('public')); // middleware to serve static files in public
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 
+// initialize session middleware
+app.use(session({
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: false
+}));
+
 // retrieve web pages for the user
 // Route to main page
 app.get('/', (req, res) => {
-    response.sendFile(__dirname + '/index.html');
+  response.sendFile(__dirname + '/index.html');
 });
 
 // Route to login page
 app.get('/login', (req, res) => {
-    response.sendFile(__dirname + '/login.html');
+  response.sendFile(__dirname + '/login.html');
 });
 
 // Route to login page
 app.get('/signup', (req, res) => {
-    response.sendFile(__dirname + '/signup.html');
+  response.sendFile(__dirname + '/signup.html');
 });
 
 /* Handle users' sent data */
@@ -51,6 +59,11 @@ app.post('/login', (req, res) => {
           } else if(!match) {
             res.status(400).send("Wrong password");
           } else {
+            // save user id and username to current session
+            req.session.userId = result[0].id;
+            req.session.username = username;
+
+            // go back to home page
             console.log('Logged In');
             res.redirect('/');
           }
@@ -90,8 +103,12 @@ app.post('/sign-up', (req, res) => {
                   console.log(error);
                   res.status(500).send("Error sending to database"); 
                 } else { // on successful creation, redirect to main page
+                  // save user id and username to current session
+                  req.session.userId = result[0].id;
+                  req.session.username = username;
+                  
+                  // redirect
                   console.log('Signed Up');
-                  console.log(hashPassword);
                   res.redirect('/');
                 }
               }
