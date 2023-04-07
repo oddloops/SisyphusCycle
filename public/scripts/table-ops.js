@@ -23,20 +23,20 @@ addRowId.addEventListener("click", () => {
     // allow input for exercise name
     const exerciseInput = document.createElement("input");
     exerciseInput.type = "text";
-    exerciseInput.name = "exercise-name";
+    exerciseInput.name = "exerciseName";
     exerciseInput.placeholder = "exercise name";
     exerciseInput.required = true;
     exercise.appendChild(exerciseInput);
 
     // create label for select
     const labelSelectBodypart = document.createElement("label");
-    labelSelectBodypart.setAttribute('for', 'body-select');
+    labelSelectBodypart.setAttribute('for', 'bodySelect');
     labelSelectBodypart.textContent = "body part: ";
     partWorked.appendChild(labelSelectBodypart);
 
     // create select dropdown for body parts, 7 in total
     const selectBodypart = document.createElement("select");
-    selectBodypart.name = "boby-select";
+    selectBodypart.name = "bodySelect";
     selectBodypart.required = true;
     
     // initial state
@@ -85,7 +85,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for weight (pounds)
     const weightLbInput = document.createElement("input");
-    weightLbInput.name = "weight-lbs";
+    weightLbInput.name = "weightLbs";
     weightLbInput.type = "number";
     weightLbInput.placeholder = "lbs lifted";
     weightLbInput.min = 0;
@@ -94,7 +94,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for weight (kilograms)
     const weightKgInput = document.createElement("input");
-    weightKgInput.name = "weight-kgs";
+    weightKgInput.name = "weightKgs";
     weightKgInput.type = "number";
     weightKgInput.placeholder = "kgs lifted";
     weightKgInput.min = 0;
@@ -103,7 +103,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for rep count
     const repsInput = document.createElement("input");
-    repsInput.name = "rep-num";
+    repsInput.name = "repNum";
     repsInput.type = "number";
     repsInput.placeholder = "rep count";
     repsInput.min = 0;
@@ -112,7 +112,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for set count
     const setsInput = document.createElement("input");
-    setsInput.name = "set-num";
+    setsInput.name = "setNum";
     setsInput.type = "number";
     setsInput.placeholder = "set count";
     setsInput.min = 0;
@@ -121,7 +121,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for data achieved
     const dateInput = document.createElement("input");
-    dateInput.name = "date-achieved";
+    dateInput.name = "dateAchieved";
     dateInput.type = "date";
     dateInput.required = true;
     date.appendChild(dateInput);
