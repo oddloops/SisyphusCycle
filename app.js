@@ -1,7 +1,6 @@
 const express = require('express'); // add express module
 const app = express();
 const db = require('./src/database/db-connection');
-const bodyParser = require('body-parser'); // add module to parse form data
 const bcrypt = require('bcrypt'); // add module for hashing passwords
 const pool = require('./src/database/db-connection');
 const session = require('express-session');
@@ -10,8 +9,8 @@ const hostname = '127.0.0.1';
 const port = 3000;
 
 app.use(express.static('public')); // middleware to serve static files in public folder
-app.use(bodyParser.urlencoded({ extended:true }));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 
 // initialize session middleware
 app.use(session({
@@ -133,6 +132,30 @@ app.post('/logout', (req, res) => {
       res.redirect('/')
     }
   });
+});
+
+// handle data from row
+app.post('/exercise-data', (req, res) => {
+  // check if logged in
+  if (req.session && req.session.userId && req.session.username) {
+    const { exerciseName, bodySelect, weightLbs, weightKgs, repNum, setNum, dateAchieved } = req.body;
+
+    pool.query(                
+      'INSERT INTO exercises (user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      [req.session.userId, exerciseName, bodySelect, weightLbs, weightKgs, repNum, setNum, dateAchieved],
+      (error, result) => {
+        if (error) {
+          console.log(error);
+        } else { // on successful insertion
+          console.log(`Inserted data for user: ${req.session.username} id: ${req.session.userId}`);
+        }
+      }
+    );
+    res.send('Data received!');
+
+  } else {
+    res.send('Not logged in!');
+  }
 });
 
 // Starts the server
