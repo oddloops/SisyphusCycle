@@ -164,7 +164,6 @@ workoutTable.addEventListener('click', () => {
 
         // Send data to server if all inputs are filled
         if (inputsFilled) {
-            console.log(data);
             fetch('/exercise-data', {
                 method: 'POST',
                 headers: {
@@ -180,10 +179,10 @@ workoutTable.addEventListener('click', () => {
                     console.error("Error sending data");
                 }
             })
-                .then(data => {
+            .then(data => {
                 console.log('Data successfully submitted');
             })
-                .catch(error => {
+            .catch(error => {
                 console.error('Error: ', error);
             });
         }
