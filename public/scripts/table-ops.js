@@ -23,7 +23,7 @@ addRowId.addEventListener("click", () => {
     // allow input for exercise name
     const exerciseInput = document.createElement("input");
     exerciseInput.type = "text";
-    exerciseInput.name = "exercise";
+    exerciseInput.name = "exercise-name";
     exerciseInput.placeholder = "exercise name";
     exerciseInput.required = true;
     exercise.appendChild(exerciseInput);
@@ -103,7 +103,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for rep count
     const repsInput = document.createElement("input");
-    repsInput.name = "reps-num";
+    repsInput.name = "rep-num";
     repsInput.type = "number";
     repsInput.placeholder = "rep count";
     repsInput.min = 0;
@@ -112,7 +112,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for set count
     const setsInput = document.createElement("input");
-    setsInput.name = "sets";
+    setsInput.name = "set-num";
     setsInput.type = "number";
     setsInput.placeholder = "set count";
     setsInput.min = 0;
