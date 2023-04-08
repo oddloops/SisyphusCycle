@@ -10,6 +10,7 @@
   <body>
     <header>
       <h1 class="site-name">Gym Panda</h1>
+      <!-- Depending on user's state either show a login or logout button -->
       <% if (userId && username) { %>
       <form action="/logout" method="POST">
         <button id="logout-btn">Logout</button>
@@ -18,8 +19,9 @@
         <button type="button" id="login-btn">Login</button>
       <% } %> 
     </header>
+
+    <!-- Table of Exercises (PRs) -->
     <button type="button" id="addRow" class="rounded">+</button>
-    <!-- <button type="button" id="delRow" class="rounded">-</button> -->
     <div class="table-wrapper">
       <table id="workoutTable">
           <thead>
@@ -38,6 +40,23 @@
               </tr>
           </thead>
           <tbody id="tableBody">
+            <% if (rowData) { %>
+              <% rowData.forEach((row) => { %>
+                <tr>
+                  <td><%= row.exercise_name %></td>
+                  <td><%= row.part_worked %></td>
+                  <td><%= row.weight_lbs %></td>
+                  <td><%= row.weight_kgs %></td>
+                  <td><%= row.reps %></td>
+                  <td><%= row.sets %></td>
+                  <td><%= row.date_achieved %></td>
+                  <td>
+                    <button type="button" name="updateExercise">✓</button>
+                    <button type="button" name="delRow">✗</button>
+                  </td>
+                </tr>
+              <% }); %>
+            <% } %>
           </tbody>
       </table>
     </div>
