@@ -24,7 +24,7 @@ app.set('view engine', 'ejs');
 
 function getUserExercises(res, userId, username) {
   pool.query(
-    'SELECT * FROM exercises WHERE user_id = ?',
+    'SELECT *, DATE_FORMAT(date_achieved, "%m/%d/%Y") AS formatted_date FROM exercises WHERE user_id = ?',
     [userId],
     (err, result) => {
     if (err) {
