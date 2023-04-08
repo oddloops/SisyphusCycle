@@ -22,13 +22,32 @@ app.use(session({
 // use ejs templating engine
 app.set('view engine', 'ejs');
 
+function getUserExercises(res, userId, username) {
+  pool.query(
+    'SELECT * FROM exercises WHERE user_id = ?',
+    [userId],
+    (err, result) => {
+    if (err) {
+      console.error(err);
+      res.render('index', { userId, username, rowData: null });
+    } else {
+      res.render('index', { userId, username, rowData: (Array.isArray(result) ? result : null ) });
+    }
+  });
+}
+
 // retrieve web pages for the user
 // Render main page
 app.get('/', (req, res) => {
   const userId = req.session.userId;
   const username = req.session.username;
 
-  res.render('index', { userId, username });
+  // if logged in then get data from table
+  if (userId && username) {
+    getUserExercises(res, userId, username);
+  } else {
+    res.render('index', { userId, username, rowData: null });
+  }
 });
 
 // Route to login page
@@ -137,22 +156,23 @@ app.post('/logout', (req, res) => {
 // handle data from row
 app.post('/exercise-data', (req, res) => {
   // check if logged in
-  if (req.session && req.session.userId && req.session.username) {
+  const userId = req.session.userId;
+  const username = req.session.username
+  if (userId && username) {
     const { exerciseName, bodySelect, weightLbs, weightKgs, repNum, setNum, dateAchieved } = req.body;
 
     pool.query(                
       'INSERT INTO exercises (user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [req.session.userId, exerciseName, bodySelect, weightLbs, weightKgs, repNum, setNum, dateAchieved],
+      [userId, exerciseName, bodySelect, weightLbs, weightKgs, repNum, setNum, dateAchieved],
       (error, result) => {
         if (error) {
           console.log(error);
         } else { // on successful insertion
-          console.log(`Inserted data for user: ${req.session.username} id: ${req.session.userId}`);
+          console.log(`Inserted data for user: ${userId} id: ${username}`);
         }
       }
     );
     res.send('Data received!');
-
   } else {
     res.send('Not logged in!');
   }
