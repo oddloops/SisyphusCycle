@@ -85,6 +85,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for weight (pounds)
     const weightLbInput = document.createElement("input");
+    weightLbInput.id = "lbs";
     weightLbInput.name = "weightLbs";
     weightLbInput.type = "number";
     weightLbInput.placeholder = "lbs lifted";
@@ -94,6 +95,7 @@ addRowId.addEventListener("click", () => {
 
     // allow input for weight (kilograms)
     const weightKgInput = document.createElement("input");
+    weightKgInput.id = "kgs";
     weightKgInput.name = "weightKgs";
     weightKgInput.type = "number";
     weightKgInput.placeholder = "kgs lifted";
@@ -192,4 +194,17 @@ workoutTable.addEventListener('click', () => {
     if (target.name === "delRow") {
         row.remove();
     }
+
+    const lbsInput = document.getElementById("lbs");
+
+    lbsInput.addEventListener('input', () => {
+        document.getElementById("kgs").value = (lbsInput.value / 2.2046).toFixed(0);
+    });
+
+    const kgsInput = document.getElementById("kgs");
+
+    kgsInput.addEventListener('input', () => {
+        document.getElementById("lbs").value = (kgsInput.value * 2.2046).toFixed(0);
+    });
+
 });
