@@ -24,14 +24,16 @@ app.set('view engine', 'ejs');
 
 function getUserExercises(res, userId, username) {
   pool.query(
-    'SELECT *, DATE_FORMAT(date_achieved, "%m/%d/%Y") AS formatted_date FROM exercises WHERE user_id = ?',
+    'SELECT *, DATE_FORMAT(date_achieved, "%m/%d/%Y") AS formatted_date FROM exercises WHERE user_id = ? ORDER BY part_worked ASC',
     [userId],
     (err, result) => {
     if (err) {
       console.error(err);
       res.render('index', { userId, username, rowData: null });
     } else {
-      res.render('index', { userId, username, rowData: (Array.isArray(result) ? result : null ) });
+      const sortedResult = Array.isArray(result) ? (result.sort((a, b) => a.part_worked.localeCompare(b.part_worked))) : null;
+      res.render('index', { userId, username, rowData: sortedResult });
+      console.log(sortedResult);
     }
   });
 }
