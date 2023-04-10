@@ -33,7 +33,6 @@ function getUserExercises(res, userId, username) {
     } else {
       const sortedResult = Array.isArray(result) ? (result.sort((a, b) => a.part_worked.localeCompare(b.part_worked))) : null;
       res.render('index', { userId, username, rowData: sortedResult });
-      console.log(sortedResult);
     }
   });
 }
