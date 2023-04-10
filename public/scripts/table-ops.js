@@ -146,9 +146,9 @@ addRowId.addEventListener("click", () => {
 workoutTable.addEventListener('click', () => {
     const target = event.target;
     const row = target.parentNode.parentNode;
+
     // to submit row's cell data
     if  (target.name === "submitExercise") {
-        const cells = row.cells;
         const inputs = row.querySelectorAll('input, select');
         const data = {};
         let inputsFilled = true;
@@ -192,19 +192,28 @@ workoutTable.addEventListener('click', () => {
 
     // to delete row
     if (target.name === "delRow") {
-        row.remove();
+        // check if the cells are not empty
+        if (row.querySelectorAll('input').length === 0) {
+            const checkDel = confirm("Delete row and exercise?");
+            if (checkDel) {
+                console.log("Confirmed");
+            }
+        } else {
+            row.remove();
+        }
     }
 
+    // to auto convert lb -> kg and vice versa
     const lbsInput = document.getElementById("lbs");
-
-    lbsInput.addEventListener('input', () => {
-        document.getElementById("kgs").value = (lbsInput.value / 2.2046).toFixed(0);
-    });
-
     const kgsInput = document.getElementById("kgs");
 
-    kgsInput.addEventListener('input', () => {
-        document.getElementById("lbs").value = (kgsInput.value * 2.2046).toFixed(0);
-    });
+    if (lbsInput || kgsInput) {
+        lbsInput.addEventListener('input', () => {
+            document.getElementById("kgs").value = (lbsInput.value / 2.2046).toFixed(0);
+        });
 
+        kgsInput.addEventListener('input', () => {
+            document.getElementById("lbs").value = (kgsInput.value * 2.2046).toFixed(0);
+        });
+    }
 });
