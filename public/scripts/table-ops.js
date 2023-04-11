@@ -237,8 +237,8 @@ workoutTable.addEventListener('click', () => {
 
         cell.addEventListener('blur', () => {
             // if empty input then return to original state
-            if (target.innerHTML.trim() === '') {
-                target.innerHTML = original;
+            if ((isNaN(cell.innerHTML)) || cell.innerHTML.trim() === '') {
+                cell.innerHTML = original;
             }
         });
     }
