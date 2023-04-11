@@ -226,7 +226,10 @@ workoutTable.addEventListener('click', () => {
     }
 
     // allow cells to be editable
-    
+    const cell = target.closest('td');
+    if (cell.classList.contains('editable')) {
+        console.log("Edit");
+    }
 
     // to auto convert lb -> kg and vice versa
     const lbsInput = document.querySelector(".lbs");
