@@ -196,7 +196,29 @@ workoutTable.addEventListener('click', () => {
         if (row.querySelectorAll('input').length === 0) {
             const checkDel = confirm("Delete row and exercise?");
             if (checkDel) {
-                console.log("Confirmed");
+                const exerciseName = row.cells[0].innerHTML;
+                // send request to delete from database tables
+                fetch(`/deleteRow`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(
+                        {exercise_name: exerciseName}
+                    )
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Deleted exercise");
+                        return response;
+                    } else {
+                        console.error('Error deleting exercise');
+                        throw new Error('Error deleting exercise');
+                    }
+                })
+                .catch(error => {
+                    console.error(`Error deleting row: ${error}`);
+                });
             }
         } else {
             row.remove();
