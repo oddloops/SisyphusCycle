@@ -85,9 +85,9 @@ addRowId.addEventListener("click", () => {
 
     // allow input for weight (pounds)
     const weightLbInput = document.createElement("input");
-    weightLbInput.id = "lbs";
     weightLbInput.name = "weightLbs";
     weightLbInput.type = "number";
+    weightLbInput.classList.add("lbs");
     weightLbInput.placeholder = "lbs lifted";
     weightLbInput.min = 0;
     weightLbInput.required = true;
@@ -95,9 +95,9 @@ addRowId.addEventListener("click", () => {
 
     // allow input for weight (kilograms)
     const weightKgInput = document.createElement("input");
-    weightKgInput.id = "kgs";
     weightKgInput.name = "weightKgs";
     weightKgInput.type = "number";
+    weightKgInput.classList.add("kgs");
     weightKgInput.placeholder = "kgs lifted";
     weightKgInput.min = 0;
     weightKgInput.required = true;
@@ -225,17 +225,20 @@ workoutTable.addEventListener('click', () => {
         }
     }
 
+    // allow cells to be editable
+    
+
     // to auto convert lb -> kg and vice versa
-    const lbsInput = document.getElementById("lbs");
-    const kgsInput = document.getElementById("kgs");
+    const lbsInput = document.querySelector(".lbs");
+    const kgsInput = document.querySelector(".kgs");
 
     if (lbsInput || kgsInput) {
         lbsInput.addEventListener('input', () => {
-            document.getElementById("kgs").value = (lbsInput.value / 2.2046).toFixed(0);
+            kgsInput.value = (lbsInput.value / 2.2046).toFixed(0);
         });
 
         kgsInput.addEventListener('input', () => {
-            document.getElementById("lbs").value = (kgsInput.value * 2.2046).toFixed(0);
+            lbsInput.value = (kgsInput.value * 2.2046).toFixed(0);
         });
     }
 });
