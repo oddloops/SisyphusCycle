@@ -45,11 +45,11 @@
                 <tr>
                   <td><%= row.exercise_name %></td>
                   <td><%= row.part_worked %></td>
-                  <td><%= row.weight_lbs %></td>
-                  <td><%= row.weight_kgs %></td>
-                  <td><%= row.reps %></td>
-                  <td><%= row.sets %></td>
-                  <td><%= row.formatted_date %></td>
+                  <td class="editable num lbs"><%= row.weight_lbs %></td>
+                  <td class="editable num kgs"><%= row.weight_kgs %></td>
+                  <td class="editable num"><%= row.reps %></td>
+                  <td class="editable num"><%= row.sets %></td>
+                  <td class="editable date"><%= row.formatted_date %></td>
                   <td>
                     <button type="button" name="updateExercise">✓</button>
                     <button type="button" name="delRow">✗</button>
