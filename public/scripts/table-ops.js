@@ -227,19 +227,32 @@ workoutTable.addEventListener('click', () => {
 
     // allow cells to be editable
     const cell = target.closest('td');
-    const original = target.dataset.original = cell.innerHTML;
-    if (cell.classList.contains('editable')) {
+    if (cell && cell.classList.contains('editable')) {
         cell.contentEditable = true;
-        
-        cell.addEventListener('input', () => {
-            console.log('edit');
-        });
+        const original = target.dataset.original = cell.innerHTML;
+        const inputType = cell.dataset.type;
+        cell.addEventListener('click', () => {
+            // Save the original value of the cell
+            const originalValue = cell.innerHTML;
 
-        cell.addEventListener('blur', () => {
-            // if empty input then return to original state
-            if ((isNaN(cell.innerHTML)) || cell.innerHTML.trim() === '') {
-                cell.innerHTML = original;
-            }
+            // Clear the innerHTML of the cell
+            cell.innerHTML = '';
+
+            // Create an input element and set its value to the original value
+            const input = document.createElement('input');
+            input.value = originalValue;
+
+            // Append the input element to the cell
+            cell.appendChild(input);
+
+            // Focus on the input element
+            input.focus();
+
+            // Add a blur event listener to the input element to save the new value
+            input.addEventListener('blur', function() {
+                // Set the innerHTML of the cell to the new value
+                cell.innerHTML = input.value;
+            });
         });
     }
 
