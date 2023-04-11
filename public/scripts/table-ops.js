@@ -227,34 +227,42 @@ workoutTable.addEventListener('click', () => {
 
     // allow cells to be editable
     const cell = target.closest('td');
-    if (cell && cell.classList.contains('editable')) {
-        cell.contentEditable = true;
-        const original = target.dataset.original = cell.innerHTML;
-        const inputType = cell.dataset.type;
-        cell.addEventListener('click', () => {
-            // Save the original value of the cell
-            const originalValue = cell.innerHTML;
+    cell.contentEditable = true;
+    const original = target.dataset.original = cell.innerHTML;
+    const originalValue = cell.value;
+    const inputType = cell.dataset.type;
+    cell.addEventListener('click', () => {
+        // Clear the innerHTML of the cell
+        cell.innerHTML = '';
 
-            // Clear the innerHTML of the cell
-            cell.innerHTML = '';
-
+        const input = (!cell.querySelector('input')) ? document.createElement('input') : cell.querySelector('input');
+        if (!cell.querySelector('input')) {
             // Create an input element and set its value to the original value
-            const input = document.createElement('input');
-            input.value = originalValue;
+            input.type = (inputType === 'number') ? "number" : "date";
+            if (inputType === 'number') {
+                input.min = 0;
+            }
+        }
+        input.value = original;
 
-            // Append the input element to the cell
-            cell.appendChild(input);
+        // Append the input element to the cell
+        cell.appendChild(input);
 
-            // Focus on the input element
-            input.focus();
+        // Focus on the input element
+        input.focus();
 
-            // Add a blur event listener to the input element to save the new value
-            input.addEventListener('blur', function() {
-                // Set the innerHTML of the cell to the new value
+        // Add a blur event listener to the input element to save the new value
+        input.addEventListener('blur', function() {
+            const value = input.value;
+            if (value === '') {
+                cell.innerHTML = original;
+                cell.value = originalValue;
+            } else {
                 cell.innerHTML = input.value;
-            });
+            }
         });
-    }
+    });
+    
 
     // to auto convert lb -> kg and vice versa
     const lbsInput = document.querySelector(".lbs");
