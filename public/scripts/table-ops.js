@@ -230,7 +230,17 @@ workoutTable.addEventListener('click', () => {
     const original = target.dataset.original = cell.innerHTML;
     if (cell.classList.contains('editable')) {
         cell.contentEditable = true;
-        console.log(original);
+        
+        cell.addEventListener('input', () => {
+            console.log('edit');
+        });
+
+        cell.addEventListener('blur', () => {
+            // if empty input then return to original state
+            if (target.innerHTML.trim() === '') {
+                target.innerHTML = original;
+            }
+        });
     }
 
     // to auto convert lb -> kg and vice versa
