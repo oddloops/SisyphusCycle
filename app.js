@@ -179,6 +179,29 @@ app.post('/exercise-data', (req, res) => {
   }
 });
 
+// handle row deletion request
+app.delete('/deleteRow', (req, res) => {
+  const user = req.session.userId;
+  const {exercise_name} = req.body;
+  console.log(exercise_name);
+  // queries to delete data
+  pool.query(
+    'DELETE exercises, exercise_history FROM exercises INNER JOIN exercise_history ON ' + 
+    'exercises.user_id = exercise_history.user_id AND exercises.exercise_name = exercise_history.exercise_name ' +
+    'WHERE exercises.user_id = ? AND exercises.exercise_name = ?',
+    [user, exercise_name],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+        res.status(500).send('Error deleting data');
+      } else {
+        console.log("Deleted from table");
+        res.send('Deleted data from database');
+      }
+    }
+  );
+});
+
 // Starts the server
 app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
