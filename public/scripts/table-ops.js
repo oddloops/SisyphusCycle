@@ -225,8 +225,6 @@ workoutTable.addEventListener('click', () => {
         }
     }
 
-    
-
     // to auto convert lb -> kg and vice versa
     const lbsInput = document.querySelector(".lbs");
     const kgsInput = document.querySelector(".kgs");
