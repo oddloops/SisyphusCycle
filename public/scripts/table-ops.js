@@ -225,53 +225,7 @@ workoutTable.addEventListener('click', () => {
         }
     }
 
-    // allow cells to be editable
-    const cell = target.closest('td');
-    const original = target.dataset.original = cell.innerHTML;
-    const originalValue = cell.value
-   // Clear the innerHTML of the cell
-    cell.innerHTML = '';
-
-    // Create input element and set its value to the original value
-    const input = document.createElement('input');
-    input.type = cell.dataset.type;
-    console.log(input.type);
-    if (input.type === 'number') {
-        input.min = 0;
-    } else if (input.type === 'date') {
-        input.value = originalValue;
-    }
-    input.value = originalValue;
-
-    // Append the input element to the cell
-    cell.appendChild(input);
-
-    // Focus on the input element
-    input.focus();
-
-    // Add a blur event listener to the input element to save the new value
-    input.addEventListener('blur', function() {
-        const value = input.value;
-        if (value === '') {
-            cell.innerHTML = original;
-            cell.value = originalValue;
-        } else {
-            if (input.type === 'number') {
-                cell.innerHTML = input.value;
-                cell.value = input.value;
-            } else if (input.type === 'date') {
-                const formattedDate = new Date(input.value).toLocaleDateString('en-US', {
-                    month: '2-digit',
-                    day: '2-digit',
-                    year: 'numeric'
-                });
-
-                cell.innerHTML = formattedDate;
-                cell.value = formattedDate;
-            }
-        }
-        input.remove();
-    }); 
+    
 
     // to auto convert lb -> kg and vice versa
     const lbsInput = document.querySelector(".lbs");
