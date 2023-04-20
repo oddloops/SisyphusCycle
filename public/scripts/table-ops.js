@@ -264,6 +264,16 @@ workoutTable.addEventListener('click', () => {
                     cell.value = originalValue;
                 } else {
                     if (input.type === 'number') {
+                        const parent = cell.parentNode;
+                        if (cell.classList.contains('weightLbs')) {
+                            const kgsCell = parent.querySelector('.weightKgs');
+                            kgsCell.innerHTML = (value / 2.2046).toFixed(0);
+                            kgsCell.value = (value / 2.2046).toFixed(0);
+                        } else if (cell.classList.contains('weightKgs')) {
+                            const lbsCell = parent.querySelector('.weightLbs');
+                            lbsCell.innerHTML = (value * 2.2046).toFixed(0);
+                            lbsCell.value = (value * 2.2046).toFixed(0);
+                        }
                         cell.innerHTML = value;
                         cell.value = value;
                     } else if (input.type === 'date') {
