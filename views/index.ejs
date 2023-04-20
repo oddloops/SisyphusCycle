@@ -43,7 +43,7 @@
             <% if (rowData) { %>
               <% rowData.forEach((row) => { %>
                 <tr>
-                  <td name="exerciseName"><%= row.exercise_name %></td>
+                  <td class="exerciseName"><%= row.exercise_name %></td>
                   <td><%= row.part_worked %></td>
                   <td class="edit weightLbs" data-type="number"><%= row.weight_lbs %></td>
                   <td class="edit weightKgs" data-type="number"><%= row.weight_kgs %></td>
