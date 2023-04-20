@@ -22,6 +22,7 @@ app.use(session({
 // use ejs templating engine
 app.set('view engine', 'ejs');
 
+// function to get a user's exercise data
 function getUserExercises(res, userId, username) {
   pool.query(
     'SELECT *, DATE_FORMAT(date_achieved, "%m/%d/%Y") AS formatted_date FROM exercises WHERE user_id = ? ORDER BY part_worked ASC',
