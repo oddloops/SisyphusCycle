@@ -45,13 +45,13 @@
                 <tr>
                   <td name="exerciseName"><%= row.exercise_name %></td>
                   <td><%= row.part_worked %></td>
-                  <td name = "weightLbs" data-type="number"><%= row.weight_lbs %></td>
-                  <td name = "weightKgs" data-type="number"><%= row.weight_kgs %></td>
-                  <td name = "repNum" data-type="number"><%= row.reps %></td>
-                  <td name = "setNum" data-type="number"><%= row.sets %></td>
-                  <td name = "dateAchieved" data-type="date"><%= row.formatted_date %></td>
+                  <td class="edit weightLbs" data-type="number"><%= row.weight_lbs %></td>
+                  <td class="edit weightKgs" data-type="number"><%= row.weight_kgs %></td>
+                  <td class="edit repNum" data-type="number"><%= row.reps %></td>
+                  <td class="edit setNum" data-type="number"><%= row.sets %></td>
+                  <td class="edit dateAchieved" data-type="date"><%= row.formatted_date %></td>
                   <td>
-                    <!-- <button type="button" name="updateExercise">✓</button> -->
+                    <button type="button" name="updateExercise">✓</button>
                     <button type="button" name="delRow">✗</button>
                   </td>
                 </tr>
