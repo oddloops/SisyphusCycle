@@ -264,10 +264,10 @@ workoutTable.addEventListener('click', () => {
                     cell.value = originalValue;
                 } else {
                     if (input.type === 'number') {
-                        cell.innerHTML = input.value;
-                        cell.value = input.value;
+                        cell.innerHTML = value;
+                        cell.value = value;
                     } else if (input.type === 'date') {
-                        const formattedDate = new Date(input.value).toLocaleDateString('en-US', {
+                        const formattedDate = new Date(value).toLocaleDateString('en-US', {
                             month: '2-digit',
                             day: '2-digit',
                             year: 'numeric',
@@ -277,6 +277,8 @@ workoutTable.addEventListener('click', () => {
                         cell.innerHTML = formattedDate;
                         cell.value = formattedDate;
                     }
+                    // add a class to denote that the cell was changed
+                    cell.classList.add('changed');
                 }
                 input.remove();
             }); 
@@ -284,15 +286,17 @@ workoutTable.addEventListener('click', () => {
     }
 
     // to auto convert lb -> kg and vice versa
-    const lbsInput = document.querySelector(".lbs");
-    const kgsInput = document.querySelector(".kgs");
+    const lbsInput = row.querySelector(".lbs");
+    const kgsInput = row.querySelector(".kgs");
 
     if (lbsInput || kgsInput) {
         lbsInput.addEventListener('input', () => {
+            kgsInput.innerHTML = (lbsInput.value / 2.2046).toFixed(0);
             kgsInput.value = (lbsInput.value / 2.2046).toFixed(0);
         });
 
         kgsInput.addEventListener('input', () => {
+            kgsInput.innerHTML = (kgsInput.value * 2.2046).toFixed(0);
             lbsInput.value = (kgsInput.value * 2.2046).toFixed(0);
         });
     }
