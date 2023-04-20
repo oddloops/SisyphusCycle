@@ -225,6 +225,64 @@ workoutTable.addEventListener('click', () => {
         }
     }
 
+    // allow cells to be edited
+    const cell = target.closest('td');
+    if (cell && cell.classList.contains('edit')) {
+        const original = target.dataset.original = cell.innerHTML;
+        const originalValue = cell.value
+        
+         const inputExists = cell.querySelector('input');
+         // checks whether an input was already created
+        if (inputExists) {
+            inputExists.focus();
+        } else {
+            // Clear the innerHTML of the cell
+            cell.innerHTML = '';
+
+            // Create input element and set its value to the original value
+            const input = document.createElement('input');
+            input.type = cell.dataset.type;
+            input.name = cell.classList[1];
+            if (input.type === 'number') {
+                input.min = 0;
+            } else if (input.type === 'date') {
+                input.value = originalValue;
+            }
+            input.value = originalValue;
+
+            // Append the input element to the cell
+            cell.appendChild(input);
+
+            // Focus on the input element
+            input.focus();
+
+            // Add a blur event listener to the input element to save the new value
+            input.addEventListener('blur', () => {
+                const value = input.value;
+                if (value === '') {
+                    cell.innerHTML = original;
+                    cell.value = originalValue;
+                } else {
+                    if (input.type === 'number') {
+                        cell.innerHTML = input.value;
+                        cell.value = input.value;
+                    } else if (input.type === 'date') {
+                        const formattedDate = new Date(input.value).toLocaleDateString('en-US', {
+                            month: '2-digit',
+                            day: '2-digit',
+                            year: 'numeric',
+                            timeZone: 'UTC'
+                        });
+
+                        cell.innerHTML = formattedDate;
+                        cell.value = formattedDate;
+                    }
+                }
+                input.remove();
+            }); 
+        }
+    }
+
     // to auto convert lb -> kg and vice versa
     const lbsInput = document.querySelector(".lbs");
     const kgsInput = document.querySelector(".kgs");
