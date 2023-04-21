@@ -1,6 +1,5 @@
 const express = require('express'); // add express module
 const app = express();
-const db = require('./src/database/db-connection');
 const bcrypt = require('bcrypt'); // add module for hashing passwords
 const pool = require('./src/database/db-connection');
 const session = require('express-session');
@@ -70,7 +69,7 @@ app.post('/login', (req, res) => {
   // query user information
   pool.query(
     'SELECT * FROM users WHERE username = ?',
-    [username, password],
+    [username],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -78,6 +77,7 @@ app.post('/login', (req, res) => {
       } else if (result.length == 0) {
         res.send('Invalid username or password');
       } else {
+        // compare the passwords 
         const hashedPassword = result[0].password;
         bcrypt.compare(password, hashedPassword, (err, match) => {
           if (err) {
@@ -109,7 +109,6 @@ app.post('/sign-up', (req, res) => {
     } 
 
     // Hash the password using bcrypt hash function
-    let hashPassword = password;
     const saltRounds = 12;
     // generate salt then hash 
     bcrypt.genSalt(saltRounds, (err, salt) => {
@@ -118,7 +117,7 @@ app.post('/sign-up', (req, res) => {
             console.error("Error hashing passwords: ", err);
           } else {
             // successfully hashed password
-            hashPassword = hash;
+            const hashPassword = hash;
             // Add information into the sql database
             pool.query(                
               'INSERT INTO users (username, password, email, sex, weight, feet, inches) VALUES (?, ?, ?, ?, ?, ?, ?)',
@@ -128,7 +127,6 @@ app.post('/sign-up', (req, res) => {
                   console.log(error);
                   res.status(500).send("Error sending to database"); 
                 } else { // on successful creation, redirect to main page
-                  const row = pool.query('SELECT * FROM users WHERE username = ?', username);
                   // save user id and username to current session
                   req.session.userId = result.insertId;
                   req.session.username = username;
