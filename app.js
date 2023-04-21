@@ -180,6 +180,44 @@ app.post('/exercise-data', (req, res) => {
   }
 });
 
+// handle updating data in row
+app.post('/update-data', (req, res) => {
+  const userId = req.session.userId;
+  const username = req.session.username
+  if (userId && username) {
+    const { exerciseName, weightLbs, weightKgs, repNum, setNum, dateAchieved } = req.body;
+    
+    // add the exercise data to exercise history before updating
+    pool.query(
+      'INSERT INTO exercise_history (user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved) ' +
+      'SELECT user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved ' +
+      'FROM exercises ' +
+      'WHERE user_id = ? AND exercise_name = ?',
+      [userId, exerciseName],
+      (error, result) => {
+        if (error) {
+          console.error(error);
+          res.status(500).send('Error updating data');
+        } else {
+          // update the exercise data
+          pool.query(
+            'UPDATE exercises SET weight_lbs = ?, weight_kgs = ?, reps = ?, sets = ?, date_achieved = ? ' + 
+            'WHERE user_id = ? AND exercise_name = ?', 
+            [weightLbs, weightKgs, repNum, setNum, dateAchieved, userId, exerciseName],
+            (error, result) => {
+              if (error) {
+                console.error(error);
+              } else {
+                res.send('Updated data');
+              }
+            }
+          );
+        }
+      } 
+    );  
+  }
+}); 
+
 // handle row deletion request
 app.delete('/deleteRow', (req, res) => {
   const user = req.session.userId;
@@ -187,13 +225,14 @@ app.delete('/deleteRow', (req, res) => {
   console.log(exercise_name);
   // queries to delete data
   pool.query(
-    'DELETE exercises, exercise_history FROM exercises INNER JOIN exercise_history ON ' + 
-    'exercises.user_id = exercise_history.user_id AND exercises.exercise_name = exercise_history.exercise_name ' +
+    'DELETE exercises, exercise_history ' +
+    'FROM exercises INNER JOIN exercise_history ' + 
+    'ON exercises.user_id = exercise_history.user_id AND exercises.exercise_name = exercise_history.exercise_name ' +
     'WHERE exercises.user_id = ? AND exercises.exercise_name = ?',
     [user, exercise_name],
     (error, result) => {
       if (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).send('Error deleting data');
       } else {
         console.log("Deleted from table");
