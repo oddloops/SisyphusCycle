@@ -190,6 +190,66 @@ workoutTable.addEventListener('click', () => {
         }
     }
 
+    // update the exercise
+    if (target.name === "updateExercise") {
+        const changedCells = row.querySelectorAll('.changed');
+        // checks if at least 1 cell was changed
+        if (changedCells.length > 0) {
+            const cells = row.querySelectorAll('td');
+
+            // dictionary of new exercise data
+            const updatedData = {};
+
+            // add in the exercise name 
+            updatedData[cells[0].classList[0]] = cells[0].innerHTML;
+
+            // uses the range of cells that can be changed
+            const start = 2;
+            const end = 6;
+            for (let i = start; i <= end; i++) {
+                const cell = cells[i];
+                const dataType = cell.getAttribute("data-type");
+
+                // get the name tof the column
+                const name = cell.classList[1];
+
+                // converts it to the proper type
+                let value = (cell.value) ? cell.value : cell.innerHTML;
+                if (dataType === 'number') {
+                    value = parseInt(value);
+                } else if (dataType === 'date') {
+                    // format the date correctly to be put into the MySql
+                    const formattedDate = new Date(value).toISOString().substring(0, 10);
+                    value = formattedDate;
+                }
+                updatedData[name] = value;
+            }    
+            fetch('/update-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            })
+            .then(response => {
+                // check response from server
+                if (response.ok) {
+                    console.log("Data sent successfully");
+                } else {
+                    console.error("Error sending data");
+                }
+            })
+            .then(data => {
+                console.log('Data successfully updateed');
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            });
+        } else {
+            console.log('No cells changed, no need to do anything');
+        }
+    }
+
     // to delete row
     if (target.name === "delRow") {
         // check if the cells are not empty
