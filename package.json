@@ -1,4 +1,11 @@
 {
+  "name": "gympanda",
+  "version": "1.0.0",
+  "description": "Workout tracking website",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
