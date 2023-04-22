@@ -4,14 +4,17 @@ const url = require('url');
 
 dotenv.config(); // get environment variables
 
-// const dbUrl = process.env.JAWDB_DB_URL;
+const dbUrl = process.env.JAWDB_DB_URL;
 
-// Create connection to desired database
+// Parse the JawsDB database URL into its component parts
+const dbUrlParts = url.parse(dbUrl);
+
+// Create connection 
 const pool = mySql.createPool({
-    host: process.env.DB_HOSTNAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
+    host: dbUrlParts.hostname,
+    user: dbUrlParts.auth.split(':')[0],
+    password: dbUrlParts.auth.split(':')[1],
+    database: dbUrlParts.path.substring(1)
 });
 
 pool.getConnection((error, connection) => {
@@ -19,7 +22,7 @@ pool.getConnection((error, connection) => {
         console.error(error.stack);
         return;
     }
-    console.log("Connected to mySql GymPanda");
+    console.log("Connected to database");
 });
 
 module.exports = pool;
