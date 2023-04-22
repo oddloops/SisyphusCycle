@@ -10,12 +10,5 @@
     "mysql2": "^3.2.0",
     "npm": "^9.6.5",
     "path": "^0.12.7"
-  },
-  "scripts": {
-    "start": "npm app.js"
-  },
-  "production": {
-    "use_env_variable": "JAWSDB_URL",
-    "dialect": "mysql"
   }
 }
