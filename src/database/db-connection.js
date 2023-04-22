@@ -4,7 +4,7 @@ const url = require('url');
 
 dotenv.config(); // get environment variables
 
-const dbUrl = process.env.JAWDB_DB_URL;
+const dbUrl = process.env.JAWSDB_BRONZE_URL;
 
 // Parse the JawsDB database URL into its component parts
 const dbUrlParts = url.parse(dbUrl);
