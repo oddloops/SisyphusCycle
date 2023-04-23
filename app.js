@@ -4,8 +4,7 @@ const bcrypt = require('bcrypt'); // add module for hashing passwords
 const pool = require('./src/database/db-connection');
 const session = require('express-session');
 
-const hostname = '127.0.0.1';
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public')); // middleware to serve static files in public folder
 app.use(express.json());
@@ -241,6 +240,6 @@ app.delete('/deleteRow', (req, res) => {
 });
 
 // Starts the server
-app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
