@@ -25,4 +25,4 @@ pool.getConnection((error, connection) => {
     console.log("Connected to database");
 });
 
-module.exports = { pool, dbUrlParts };
+module.exports = pool;

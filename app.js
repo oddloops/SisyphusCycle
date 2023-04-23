@@ -1,10 +1,10 @@
 const express = require('express'); // add express module
 const app = express();
 const bcrypt = require('bcrypt'); // add module for hashing passwords
-const { pool, dbUrlParts } = require('./src/database/db-connection');
+const pool = require('./src/database/db-connection');
 const session = require('express-session');
 
-const hostname = dbUrlParts.hostname;
+const hostname = '127.0.0.1';
 const port = 3000;
 
 app.use(express.static('public')); // middleware to serve static files in public folder
