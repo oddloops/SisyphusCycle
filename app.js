@@ -5,7 +5,7 @@ const pool = require('./src/database/db-connection');
 const session = require('express-session');
 
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.static('public')); // middleware to serve static files in public folder
 app.use(express.json());
