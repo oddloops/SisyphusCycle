@@ -245,9 +245,8 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-/*
-For local testing
-app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-}
-*/
+
+// For local testing
+// app.listen(PORT, hostname, () => {
+//     console.log(`Server running at http://${hostname}:${PORT}/`);
+// });
