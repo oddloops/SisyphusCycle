@@ -2,10 +2,21 @@ body {
     font-family: 'Open Sans', Helvetica, sans-serif;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 table {
     table-layout: auto;
     width: 100%;
     border-collapse: collapse;
+}
+
+thead {
+    background-color: #611C35;
+    color: #C2F8CB;
 }
 
 th, td {
@@ -41,13 +52,4 @@ button.rounded {
 .table-wrapper {
     display: flex;
     align-items: center;
-}
-
-thead {
-    background-color: #34113F;
-    color: #C2F8CB;
-}
-
-th {
-    border-color: #C2F8CB;
 }
