@@ -3,6 +3,7 @@ const app = express();
 const bcrypt = require('bcrypt'); // add module for hashing passwords
 const pool = require('./src/database/db-connection');
 const session = require('express-session');
+const path = require('path');
 
 const hostname = '127.0.0.1';
 const PORT = process.env.PORT || 3000;
@@ -53,12 +54,12 @@ app.get('/', (req, res) => {
 
 // Route to login page
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
 // Route to login page
 app.get('/signup', (req, res) => {
-  res.render('signup')
+  res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
 /* Handle users' sent data */
