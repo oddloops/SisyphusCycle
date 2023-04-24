@@ -54,6 +54,14 @@ button.log {
     border-radius: 30%;
 }
 
+.account-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 .table-wrapper {
     display: flex;
     align-items: center;
