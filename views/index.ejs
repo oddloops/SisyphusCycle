@@ -13,10 +13,10 @@
       <!-- Depending on user's state either show a login or logout button -->
       <% if (userId && username) { %>
       <form action="/logout" method="POST">
-        <button id="logout-btn">Logout</button>
+        <button id="logout-btn" class="log">Logout</button>
       </form>
       <% } else { %>
-        <button type="button" id="login-btn">Login</button>
+        <button type="button" id="login-btn" class="log">Login</button>
       <% } %> 
     </header>
 
