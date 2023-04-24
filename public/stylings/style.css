@@ -3,10 +3,8 @@ body {
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-inline: 15%;
+    background-color: #FDFFFF;
+    color: #C2F8CB;
 }
 
 table {
@@ -22,11 +20,6 @@ th, td {
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
-}
-
-.table-wrapper {
-    display: flex;
-    align-items: center;
 }
 
 button.login-btn {
@@ -48,4 +41,18 @@ button.rounded {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 30%;
+}
+
+.table-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+thead {
+    background-color: #34113F;
+    color: #C2F8CB;
+}
+
+th {
+    border-color: #C2F8CB;
 }
