@@ -1,18 +1,15 @@
+/* Typography */
 body {
     font-family: 'Open Sans', Helvetica, sans-serif;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 10%;
-    padding-right: 10%;
+label {
+  display: block;
 }
 
 table {
-    table-layout: auto;
     width: 100%;
+    table-layout: auto;
     border-collapse: collapse;
 }
 
@@ -23,43 +20,62 @@ thead {
 
 th, td {
     display: table-cell;
-    border: 1px solid #000000;
     padding: 5px;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
+    border: 1px solid #000000;
+}
+
+header.home {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: #2E5077;
+    color: #C2F8CB;
+}
+
+footer.tohome {
+    padding-top: 10px;
 }
 
 button.log {
-    background-color: white;
-    border: none;
     padding: 10px;
     font-size: 18px;
     font-weight: bold;
-    cursor: pointer;
     border-radius: 5px;
+    border: none;
+    background-color: #2E5077;
+    color: #C2F8CB;
+    cursor: pointer;
 }
 
 #addRow {
-    border: 1px solid #000000;
-    padding: 15px 20px;
     position: fixed;
     bottom: 0;
     right: 0;
+    border: 1px solid #000000;
+    padding: 5px 10px;
     text-align: center;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 25px;
     margin: 4px 2px;
-    cursor: pointer;
     border-radius: 30%;
+    cursor: pointer;
+}
+
+#login-account, #signup-account {
+    margin-left: 2rem;
 }
 
 .account-page {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .table-wrapper {
