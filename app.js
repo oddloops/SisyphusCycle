@@ -23,17 +23,21 @@ app.use(session({
 app.set('view engine', 'ejs');
 
 // function to get a user's exercise data
-function getUserExercises(res, userId, username) {
+function getUserExercises(res, userId, username, table, page) {
   pool.query(
-    'SELECT *, DATE_FORMAT(date_achieved, "%m/%d/%Y") AS formatted_date FROM exercises WHERE user_id = ? ORDER BY part_worked ASC',
+    `SELECT *, DATE_FORMAT(date_achieved, "%m/%d/%Y") 
+    AS formatted_date 
+    FROM ${table} 
+    WHERE user_id = ? 
+    ORDER BY part_worked ASC, formatted_date ASC`,
     [userId],
     (err, result) => {
     if (err) {
       console.error(err);
-      res.render('index', { userId, username, rowData: null });
+      res.render(page, { userId, username, rowData: null });
     } else {
       const sortedResult = Array.isArray(result) ? (result.sort((a, b) => a.part_worked.localeCompare(b.part_worked))) : null;
-      res.render('index', { userId, username, rowData: sortedResult });
+      res.render(page, { userId, username, rowData: sortedResult });
     }
   });
 }
@@ -46,7 +50,7 @@ app.get('/', (req, res) => {
 
   // if logged in then get data from table
   if (userId && username) {
-    getUserExercises(res, userId, username);
+    getUserExercises(res, userId, username, 'exercises', 'index');
   } else {
     res.render('index', { userId, username, rowData: null });
   }
@@ -60,6 +64,19 @@ app.get('/login', (req, res) => {
 // Route to login page
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'signup.html'));
+});
+
+// Route to history page
+app.get('/history', (req, res) => {
+  const userId = req.session.userId;
+  const username = req.session.username;
+
+  // if logged in then get data from table
+  if (userId && username) {
+    getUserExercises(res, userId, username, 'exercise_history', 'history');
+  } else {
+    res.render('history', { userId, username, rowData: null });
+  }
 });
 
 /* Handle users' sent data */
