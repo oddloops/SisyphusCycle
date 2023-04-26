@@ -9,16 +9,27 @@
   </head>
   
   <body>
-    <header class="home">
-      <h1 class="site-name">Gym Panda</h1>
+    <header class="page">
+      <h1>Gym Panda</h1>
       <!-- Depending on user's state either show a login or logout button -->
-      <% if (userId && username) { %>
-      <form action="/logout" method="POST">
-        <button id="logout-btn" class="log">Logout</button>
-      </form>
-      <% } else { %>
-        <button type="button" id="login-btn" class="log">Login</button>
-      <% } %> 
+      <nav>
+        <ul>
+            <li>
+              <% if (userId && username) { %>
+                <form action="/logout" method="POST">
+                  <button id="logout-btn" class="nav-button">Logout</button>
+                </form>
+              <% } else { %>
+                <button type="button" id="login-btn" class="nav-button">Login</button>
+              <% } %> 
+            </li>
+            <li>
+              <% if (userId && username) { %>
+                <button type="button" id="history-btn" class="nav-button">History</button>
+              <% } %>
+            </li>
+        </ul>
+      </nav> 
     </header>
 
     <!-- Table of Exercises (PRs) -->
