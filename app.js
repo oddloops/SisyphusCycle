@@ -188,10 +188,10 @@ app.post('/update-data', (req, res) => {
     
     // add the exercise data to exercise history before updating
     pool.query(
-      'INSERT INTO exercise_history (user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved) ' +
-      'SELECT user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved ' +
-      'FROM exercises ' +
-      'WHERE user_id = ? AND exercise_name = ?',
+      `INSERT INTO exercise_history (user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved)
+      SELECT user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved
+      FROM exercises
+      WHERE user_id = ? AND exercise_name = ?`,
       [userId, exerciseName],
       (error, result) => {
         if (error) {
@@ -224,18 +224,26 @@ app.delete('/deleteRow', (req, res) => {
   console.log(exercise_name);
   // queries to delete data
   pool.query(
-    'DELETE exercises, exercise_history ' +
-    'FROM exercises INNER JOIN exercise_history ' + 
-    'ON exercises.user_id = exercise_history.user_id AND exercises.exercise_name = exercise_history.exercise_name ' +
-    'WHERE exercises.user_id = ? AND exercises.exercise_name = ?',
+    'DELETE FROM exercises WHERE user_id = ? AND exercise_name = ?',
     [user, exercise_name],
-    (error, result) => {
+    (error) => {
       if (error) {
         console.error(error);
         res.status(500).send('Error deleting data');
       } else {
-        console.log("Deleted from table");
-        res.send('Deleted data from database');
+        pool.query(
+          'DELETE FROM exercise_history WHERE user_id = ? AND exercise_name = ?',
+          [user, exercise_name],
+          (error) => {
+            if (error) {
+              console.error(error);
+              res.status(500).send('Error deleting history');
+            } else {
+              console.log("Deleted from table");
+              res.send('Deleted data from database');
+            }
+          }
+        );
       }
     }
   );

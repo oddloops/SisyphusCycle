@@ -31,7 +31,6 @@ addRowId.addEventListener("click", () => {
     // create label for select
     const labelSelectBodypart = document.createElement("label");
     labelSelectBodypart.setAttribute('for', 'bodySelect');
-    labelSelectBodypart.textContent = "body part: ";
     partWorked.appendChild(labelSelectBodypart);
 
     // create select dropdown for body parts, 7 in total
