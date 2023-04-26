@@ -52,6 +52,10 @@ button.log {
     cursor: pointer;
 }
 
+button.log:hover {
+    color: #000000;
+}
+
 #addRow {
     position: fixed;
     bottom: 0;
