@@ -176,6 +176,7 @@ workoutTable.addEventListener('click', () => {
                 // check response from server
                 if (response.ok) {
                     console.log("Data sent successfully");
+                    location.reload();
                 } else {
                     console.error("Error sending data");
                 }
@@ -234,6 +235,8 @@ workoutTable.addEventListener('click', () => {
                 // check response from server
                 if (response.ok) {
                     console.log("Data sent successfully");
+                    alert("Updated exercise!");
+                    location.reload();
                 } else {
                     console.error("Error sending data");
                 }
@@ -269,6 +272,7 @@ workoutTable.addEventListener('click', () => {
                 .then(response => {
                     if (response.ok) {
                         console.log("Deleted exercise");
+                        location.reload();
                         return response;
                     } else {
                         console.error('Error deleting exercise');
