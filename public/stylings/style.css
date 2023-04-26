@@ -27,7 +27,7 @@ th, td {
     border: 1px solid #000000;
 }
 
-header.home {
+header.page {
     justify-content: space-between;
     align-items: center;
     display: flex;
@@ -35,6 +35,21 @@ header.home {
     padding-right: 10%;
     background-color: #2E5077;
     color: #C2F8CB;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav a:hover {
+    color: #000000;
 }
 
 footer.tohome {
@@ -47,7 +62,7 @@ footer.credit {
     left: 0;
 }
 
-button.log {
+button.nav-button {
     padding: 10px;
     font-size: 18px;
     font-weight: bold;
@@ -58,7 +73,7 @@ button.log {
     cursor: pointer;
 }
 
-button.log:hover {
+button.nav-button:hover {
     color: #000000;
 }
 

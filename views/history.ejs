@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GymPanda</title>
+    <title>History</title>
     <link rel="icon" type="image/png" href="/public/assets/effort.png"/>
     <link rel="stylesheet" type="text/css" href="/stylings/style.css">
   </head>
@@ -16,7 +16,7 @@
         <ul>
             <li>
               <% if (userId && username) { %>
-                <button type="button" id="history-btn" class="nav-button">History</button>
+                <button type="button" id="home-btn" class="nav-button">Home</button>
               <% } %>
             </li>
             <li>
@@ -43,7 +43,6 @@
                   <th rowspan="2">Reps</th>
                   <th rowspan="2">Set</th>
                   <th rowspan="2">Date Achieved</th>
-                  <th rowspan="2">✓ | X</th>
               </tr>
               <tr>
                 <th>Pounds(LBS)</th>
@@ -61,21 +60,17 @@
                   <td class="edit repNum" data-type="number"><%= row.reps %></td>
                   <td class="edit setNum" data-type="number"><%= row.sets %></td>
                   <td class="edit dateAchieved" data-type="date"><%= row.formatted_date %></td>
-                  <td>
-                    <button type="button" name="updateExercise">✓</button>
-                    <button type="button" name="delRow">✗</button>
-                  </td>
                 </tr>
               <% }); %>
             <% } %>
           </tbody>
       </table>
-      <button type="button" id="addRow">+</button>
     </div>
     <footer class="credit">
       <a href="https://www.flaticon.com/free-icons/effort" title="effort icons">Effort icons created by Paul J. - Flaticon</a>
     </footer>
     <script src="../scripts/table-ops.js"></script>
     <script src="../scripts/main-page.js"></script>
+    <script src="../scripts/to-home.js"></script>
   </body>
 </html>

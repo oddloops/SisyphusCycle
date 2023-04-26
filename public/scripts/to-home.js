@@ -1,5 +1,5 @@
-const toHome = document.getElementById("to-home");
+const toHome = document.getElementById("home-btn");
 
 toHome.addEventListener('click', ()=> {
-    window.location.href = './';
+    window.location.href = '/';
 });
