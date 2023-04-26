@@ -126,7 +126,7 @@ app.post('/sign-up', (req, res) => {
                (error, result) => {
                 if (error) {
                   console.log(error);
-                  res.status(500).send("Error sending to database"); 
+                  res.status(500).send(error); 
                 } else { // on successful creation, redirect to main page
                   // save user id and username to current session
                   req.session.userId = result.insertId;
