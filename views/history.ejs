@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>History</title>
+    <link rel="icon" type="image/png" href="/public/assets/effort.png"/>
+    <link rel="stylesheet" type="text/css" href="/stylings/style.css">
+  </head>
+  
+  <body>
+    <header class="page">
+      <h1>Gym Panda</h1>
+      <!-- Depending on user's state either show a login or logout button -->
+      <nav>
+        <ul>
+            <li>
+              <% if (userId && username) { %>
+                <button type="button" id="home-btn" class="nav-button">Home</button>
+              <% } %>
+            </li>
+            <li>
+              <% if (userId && username) { %>
+                <form action="/logout" method="POST">
+                  <button id="logout-btn" class="nav-button">Logout</button>
+                </form>
+              <% } else { %>
+                <button type="button" id="login-btn" class="nav-button">Login</button>
+              <% } %> 
+            </li>
+        </ul>
+      </nav> 
+    </header>
+
+    <!-- Table of Exercises (PRs) -->
+    <div class="table-wrapper">
+      <table id="workoutTable">
+          <thead>
+              <tr>
+                  <th rowspan="2">Exercise</th>
+                  <th rowspan="2">Body Part(s) Worked</th>
+                  <th colspan="2">Personal Record Weight</th>
+                  <th rowspan="2">Reps</th>
+                  <th rowspan="2">Set</th>
+                  <th rowspan="2">Date Achieved</th>
+              </tr>
+              <tr>
+                <th>Pounds(LBS)</th>
+                <th>Kilograms(KGS)</th>
+              </tr>
+          </thead>
+          <tbody id="tableBody">
+            <% if (rowData) { %>
+              <% rowData.forEach((row) => { %>
+                <tr>
+                  <td class="exerciseName"><%= row.exercise_name %></td>
+                  <td><%= row.part_worked %></td>
+                  <td class="edit weightLbs" data-type="number"><%= row.weight_lbs %></td>
+                  <td class="edit weightKgs" data-type="number"><%= row.weight_kgs %></td>
+                  <td class="edit repNum" data-type="number"><%= row.reps %></td>
+                  <td class="edit setNum" data-type="number"><%= row.sets %></td>
+                  <td class="edit dateAchieved" data-type="date"><%= row.formatted_date %></td>
+                </tr>
+              <% }); %>
+            <% } %>
+          </tbody>
+      </table>
+    </div>
+    <footer class="credit">
+      <a href="https://www.flaticon.com/free-icons/effort" title="effort icons">Effort icons created by Paul J. - Flaticon</a>
+    </footer>
+    <script src="../scripts/table-ops.js"></script>
+    <script src="../scripts/main-page.js"></script>
+    <script src="../scripts/to-home.js"></script>
+  </body>
+</html>
