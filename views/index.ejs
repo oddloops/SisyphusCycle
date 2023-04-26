@@ -16,17 +16,17 @@
         <ul>
             <li>
               <% if (userId && username) { %>
+                <button type="button" id="history-btn" class="nav-button">History</button>
+              <% } %>
+            </li>
+            <li>
+              <% if (userId && username) { %>
                 <form action="/logout" method="POST">
                   <button id="logout-btn" class="nav-button">Logout</button>
                 </form>
               <% } else { %>
                 <button type="button" id="login-btn" class="nav-button">Login</button>
               <% } %> 
-            </li>
-            <li>
-              <% if (userId && username) { %>
-                <button type="button" id="history-btn" class="nav-button">History</button>
-              <% } %>
             </li>
         </ul>
       </nav> 
