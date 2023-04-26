@@ -41,6 +41,12 @@ footer.tohome {
     padding-top: 10px;
 }
 
+footer.credit {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
 button.log {
     padding: 10px;
     font-size: 18px;
