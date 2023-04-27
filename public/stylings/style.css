@@ -27,16 +27,6 @@ th, td {
     border: 1px solid #000000;
 }
 
-header.page {
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    padding-left: 10%;
-    padding-right: 10%;
-    background-color: #2E5077;
-    color: #C2F8CB;
-}
-
 nav ul {
     list-style: none;
     display: flex;
@@ -52,6 +42,16 @@ nav a:hover {
     color: #000000;
 }
 
+header.page {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: #2E5077;
+    color: #C2F8CB;
+}
+
 footer.tohome {
     padding-top: 10px;
 }
@@ -62,19 +62,22 @@ footer.credit {
     left: 0;
 }
 
+button {
+    cursor: pointer;
+}
+
 button.nav-button {
     padding: 10px;
     font-size: 18px;
     font-weight: bold;
     border-radius: 5px;
-    border: none;
+    border: 1px solid #E25822;
     background-color: #2E5077;
     color: #C2F8CB;
-    cursor: pointer;
 }
 
 button.nav-button:hover {
-    color: #000000;
+    color: #08ff32;
 }
 
 #addRow {
