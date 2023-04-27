@@ -4,7 +4,9 @@ const workoutTable = document.getElementById("tableBody");
 // get the id of the add row button (+)
 const addRowId = document.getElementById("addRow");
 
+// flag to prevent excess rows
 let addRowClicked = false;
+
 // add eventListener when the button is clicked to add a row
 addRowId.addEventListener("click", () => {
     if (!addRowClicked) {
@@ -140,7 +142,12 @@ addRowId.addEventListener("click", () => {
         deleteButton.name = "delRow";
         deleteButton.textContent = "✗";
         buttons.appendChild(deleteButton);
+
+        // set flag to prevent excess clicking
         addRowClicked = true;
+
+        // focus onto the first cell of row (exercise name)
+        exerciseInput.focus();
     }
 });
 
