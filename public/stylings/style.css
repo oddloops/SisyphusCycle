@@ -76,6 +76,7 @@ button.nav-button:hover {
     color: #08ff32;
 }
 
+/* Style the addRow button */
 #addRow {
     position: fixed;
     bottom: 0;
@@ -90,18 +91,7 @@ button.nav-button:hover {
     cursor: pointer;
 }
 
-#login-account, #signup-account {
-    margin-left: 2rem;
-}
-
-.account-page {
-    height: 75vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
+/* Align all elements to be the centered */
 .table-wrapper {
     display: flex;
     align-items: center;
