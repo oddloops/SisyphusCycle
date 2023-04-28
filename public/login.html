@@ -8,10 +8,19 @@
         <link rel="stylesheet" type="text/css" href="/stylings/style.css">
     </head>
     <body>
+        <header class="page">
+        <h1>Sisyphus Cycle</h1>
+        <!-- Depending on user's state either show a login or logout button -->
+        <nav>
+            <ul>
+                <li>
+                    <button type="button" id="home-btn" class="nav-button">Home</button>
+                </li>
+            </ul>
+        </nav> 
+        </header>
         <div class="account-page">
-            <header>
-                <h1>Login</h1>
-            </header>
+            <h1>Login</h1>
             <main>
                 <form action="/login" method="post">
                     <label for="username">
@@ -26,9 +35,6 @@
                     <button type="button" id="to-signup">Sign Up</button>
                 </form>
             </main>
-            <footer class="tohome">
-                <button type="button" id="home-btn">Home</button>
-            </footer>
         </div>
     </body>
     <script src="../scripts/login-page.js"></script>
