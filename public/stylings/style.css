@@ -68,12 +68,13 @@ button.nav-button {
     font-weight: bold;
     border-radius: 5px;
     border: 1px solid #E25822;
-    background-color: #2E5077;
+    background: #2E5077;
     color: #C2F8CB;
 }
 
 button.nav-button:hover {
     color: #08ff32;
+    background: #366193;
 }
 
 /* Style the addRow button */

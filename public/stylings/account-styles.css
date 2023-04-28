@@ -36,17 +36,16 @@ button:not([class="nav-button"]) {
     padding: 14px 24px;
     border: none;
     transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
-    background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
-    color: #fff;
-                
+    background: linear-gradient(to right, #981533 0%, #891239 50%, #860340 100%);
+    color: #ced4da;
 }
 
-.account-page {
-    height: 75vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+button:not([class="nav-button"]):hover {
+    background: linear-gradient(to right, #b24763 0%, #b33d7e 50%, #b33d7e 100%);
+}
+
+button:not([class="nav-button"]) {
+    margin-left: 5px;
 }
 
 form > * {
@@ -55,4 +54,12 @@ form > * {
 
 form > *:last-child {
     margin-bottom: 0;
+}
+
+.account-page {
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
