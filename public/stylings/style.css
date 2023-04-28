@@ -52,10 +52,6 @@ header.page {
     color: #C2F8CB;
 }
 
-footer.tohome {
-    padding-top: 10px;
-}
-
 footer.credit {
     position: fixed;
     bottom: 0;
@@ -99,7 +95,7 @@ button.nav-button:hover {
 }
 
 .account-page {
-    height: 100vh;
+    height: 75vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
