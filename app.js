@@ -93,7 +93,7 @@ app.post('/login', (req, res) => {
         console.log(err);
         res.status(500).send("Error sending to database");
       } else if (result.length == 0) {
-        res.send('Invalid username or password');
+        res.status(401).send('Invalid username or password');
       } else {
         // compare the passwords 
         const hashedPassword = result[0].password;
@@ -101,7 +101,7 @@ app.post('/login', (req, res) => {
           if (err) {
             res.status(500).send("Error comparing passwords");
           } else if(!match) {
-            res.status(400).send("Wrong password");
+            res.status(401).send("Wrong password");
           } else {
             // save user id and username to current session
             req.session.userId = result[0].id;
