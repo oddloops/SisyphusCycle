@@ -6,6 +6,7 @@
         <title>Sign Up</title>
         <link rel="icon" type="image/png" href="/assets/effort.ico"/>
         <link rel="stylesheet" type="text/css" href="/stylings/style.css">
+        <link rel="stylesheet" type="text/css" href="/stylings/account-styles.css">
     </head>
     
     <body>
@@ -49,10 +50,12 @@
                     <label for="inches">
                         <input type="number" id="inches" name="inches" placeholder="Inches" min="0" required>
                     </label>
-                    <input type="submit" value="Sign Up" id="signup-account">
-                    <button type="button" id="to-login">Login</button><br>
+                    <div class="centered">
+                        <input type="submit" value="Sign Up" id="signup-account">
+                        <button type="button" id="to-login">Login</button>
+                    </div>
                 </form>
-            </main>
+            </main> 
         </div>
     </body>
     <script src="../scripts/signup-page.js"></script>
