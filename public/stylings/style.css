@@ -14,7 +14,7 @@ table {
 }
 
 thead {
-    background-color: #611C35;
+    background: #611C35;
     color: #C2F8CB;
 }
 
@@ -48,12 +48,8 @@ header.page {
     display: flex;
     padding-left: 10%;
     padding-right: 10%;
-    background-color: #2E5077;
+    background: #2E5077;
     color: #C2F8CB;
-}
-
-footer.tohome {
-    padding-top: 10px;
 }
 
 footer.credit {
@@ -72,40 +68,40 @@ button.nav-button {
     font-weight: bold;
     border-radius: 5px;
     border: 1px solid #E25822;
-    background-color: #2E5077;
+    background: #2E5077;
     color: #C2F8CB;
 }
 
 button.nav-button:hover {
     color: #08ff32;
+    background: #366193;
 }
 
+/* Style the addRow button */
 #addRow {
     position: fixed;
-    bottom: 0;
-    right: 0;
+    bottom: 30px;
+    right: 30px;
     border: 1px solid #000000;
-    padding: 5px 10px;
+    padding: 8px 16px;
     text-align: center;
     text-decoration: none;
-    font-size: 25px;
     margin: 4px 2px;
     border-radius: 30%;
-    cursor: pointer;
+    color: #C2F8CB;
+    background: #611C35;
+    font-size: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
 }
 
-#login-account, #signup-account {
-    margin-left: 2rem;
+#addRow:hover {
+    transform: scale(1.04);
+    color: #C2F8CB;
+    background: #86274a;
 }
 
-.account-page {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
+/* Align all elements to be the centered */
 .table-wrapper {
     display: flex;
     align-items: center;

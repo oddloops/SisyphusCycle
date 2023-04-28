@@ -6,13 +6,23 @@
         <title>Sign Up</title>
         <link rel="icon" type="image/png" href="/assets/effort.ico"/>
         <link rel="stylesheet" type="text/css" href="/stylings/style.css">
+        <link rel="stylesheet" type="text/css" href="/stylings/account-styles.css">
     </head>
     
     <body>
+        <header class="page">
+        <h1>Sisyphus Cycle</h1>
+        <!-- Depending on user's state either show a login or logout button -->
+        <nav>
+            <ul>
+                <li>
+                    <button type="button" id="home-btn" class="nav-button">Home</button>
+                </li>
+            </ul>
+        </nav> 
+        </header>
         <div class="account-page">
-            <header>
-                <h1>Sign Up</h1>
-            </header>
+            <h1>Sign Up</h1>
             <main>
                 <form action="/sign-up" method="post">
                     <label for="username">
@@ -40,13 +50,12 @@
                     <label for="inches">
                         <input type="number" id="inches" name="inches" placeholder="Inches" min="0" required>
                     </label>
-                    <input type="submit" value="Sign Up" id="signup-account">
-                    <button type="button" id="to-login">Login</button><br>
+                    <div class="centered">
+                        <button type="submit" id="signup-account">Sign Up</button>
+                        <button type="button" id="to-login">Login</button>
+                    </div>
                 </form>
-            </main>
-            <footer class="tohome">            
-                <button type="button" id="home-btn">Home</button>
-            </footer>
+            </main> 
         </div>
     </body>
     <script src="../scripts/signup-page.js"></script>
