@@ -91,25 +91,24 @@ app.post('/login', (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
-        res.status(500).send("Error sending to database");
+        res.status(500).send('Error sending to database');
       } else if (result.length == 0) {
-        res.status(401).send('Invalid username or password');
+        res.status(401).send('Wrong username');
       } else {
         // compare the passwords 
         const hashedPassword = result[0].password;
         bcrypt.compare(password, hashedPassword, (err, match) => {
           if (err) {
-            res.status(500).send("Error comparing passwords");
+            res.status(500).send('Error comparing passwords');
           } else if(!match) {
-            res.status(401).send("Wrong password");
+            res.status(401).send('Wrong password');
           } else {
             // save user id and username to current session
             req.session.userId = result[0].id;
             req.session.username = username;
 
             // go back to home page
-            console.log('Logged In');
-            res.redirect('/');
+            res.status(200).send('Login successful');
           }
         });
       }
