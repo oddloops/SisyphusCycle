@@ -28,7 +28,7 @@ loginForm.addEventListener('submit', (event) => {
         if (response.ok) {
             window.location.href = '/';
         } else if (response.status === 401){
-            errorMessage.textContent = 'Wrong username or password';
+            errorMessage.textContent = 'Wrong username or password!';
         } else {
             errorMessage.textContent = 'Unexpected error';
         } 

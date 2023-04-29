@@ -16,9 +16,9 @@ input:not([type="submit"]), select {
 input:focus {
     color: #212529;
     background-color: #fff;
-    border-color: #86b7fe;
+    border-color: #007bff;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+    box-shadow: 0 0 0 .10rem rgb(13 110 253 / 25%);
 }
 
 button:not([class="nav-button"]) {
@@ -50,6 +50,10 @@ form > * {
 
 form > *:last-child {
     margin-bottom: 0;
+}
+
+#error-message {
+    color: #ff0000;
 }
 
 .account-page {
