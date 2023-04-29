@@ -127,36 +127,55 @@ app.post('/sign-up', (req, res) => {
 
     // Hash the password using bcrypt hash function
     const saltRounds = 12;
-    // generate salt then hash 
-    bcrypt.genSalt(saltRounds, (err, salt) => {
-      bcrypt.hash(password, saltRounds, (err, hash) => {
-          if (err) {
-            console.error("Error hashing passwords: ", err);
-          } else {
-            // successfully hashed password
-            const hashPassword = hash;
-            // Add information into the sql database
-            pool.query(                
-              'INSERT INTO users (username, password, email, sex, weight, feet, inches) VALUES (?, ?, ?, ?, ?, ?, ?)',
-              [username, hashPassword, email, sex, weight, feet, inches],
-               (error, result) => {
-                if (error) {
-                  console.log(error);
-                  res.status(500).send("Error sending to database"); 
-                } else { // on successful creation, redirect to main page
-                  // save user id and username to current session
-                  req.session.userId = result.insertId;
-                  req.session.username = username;
-                  // redirect
-                  console.log('Signed Up');
-                  res.redirect('/');
-                }
+    
+    // check if user exist and create if not
+    pool.query(
+      'SELECT * FROM users WHERE username = ? OR email = ?',
+      [username, email],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send('Error sending to database');
+        } else if (result.length > 0 && result[0].username === username) {
+          // Username already in use
+          res.status(400).send('Username already in use');
+        } else if (result.length > 0 && result[0].email === email) {
+          // Email already in use
+          res.status(400).send('Email already in use');
+        } else {
+          // generate salt then hash 
+          bcrypt.genSalt(saltRounds, (err, salt) => {
+            bcrypt.hash(password, saltRounds, (err, hash) => {
+                if (err) {
+                  console.error("Error hashing passwords: ", err);
+                } else {
+                  // successfully hashed password
+                  const hashPassword = hash;
+                  // Add information into the sql database
+                  pool.query(                
+                  'INSERT INTO users (username, password, email, sex, weight, feet, inches) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                  [username, hashPassword, email, sex, weight, feet, inches],
+                  (error, result) => {
+                    if (error) {
+                      console.log(error);
+                      res.status(500).send(error); 
+                    } else { // on successful creation, redirect to main page
+                      // save user id and username to current session
+                      req.session.userId = result.insertId;
+                      req.session.username = username;
+                      // redirect
+                      console.log('Signed Up');
+                      res.status(200).send('Sign up successful');
+                    }
+                  }
+                );
               }
-            );
-          }
-        });
-    });
-}); 
+            });
+          });
+        }
+      }
+    )
+});
 
 // handle logout post request
 app.post('/logout', (req, res) => {
