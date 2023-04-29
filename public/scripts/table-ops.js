@@ -212,7 +212,7 @@ workoutTable.addEventListener('click', () => {
             const updatedData = {};
 
             // add in the exercise name 
-            updatedData[cells[0].classList[0]] = cells[0].innerHTML;
+            updatedData[cells[0].classList[0]] = cells[0].textContent;
 
             // uses the range of cells that can be changed
             const start = 2;
@@ -225,7 +225,7 @@ workoutTable.addEventListener('click', () => {
                 const name = cell.classList[1];
 
                 // converts it to the proper type
-                let value = (cell.value) ? cell.value : cell.innerHTML;
+                let value = (cell.value) ? cell.value : cell.textContent;
                 if (dataType === 'number') {
                     value = parseInt(value);
                 } else if (dataType === 'date') {
@@ -269,7 +269,7 @@ workoutTable.addEventListener('click', () => {
         if (row.querySelectorAll('input').length === 0) {
             const checkDel = confirm("Delete row and exercise?");
             if (checkDel) {
-                const exerciseName = row.cells[0].innerHTML;
+                const exerciseName = row.cells[0].textContent;
                 // send request to delete from database tables
                 fetch(`/deleteRow`, {
                     method: 'DELETE',
@@ -302,7 +302,7 @@ workoutTable.addEventListener('click', () => {
     // allow cells to be edited
     const cell = target.closest('td');
     if (cell && cell.classList.contains('edit')) {
-        const original = target.dataset.original = cell.innerHTML;
+        const original = target.dataset.original = cell.textContent;
         const originalValue = cell.value
         
          const inputExists = cell.querySelector('input');
@@ -310,8 +310,8 @@ workoutTable.addEventListener('click', () => {
         if (inputExists) {
             inputExists.focus();
         } else {
-            // Clear the innerHTML of the cell
-            cell.innerHTML = '';
+            // Clear the text of the cell
+            cell.textContent = '';
 
             // Create input element and set its value to the original value
             const input = document.createElement('input');
@@ -334,21 +334,21 @@ workoutTable.addEventListener('click', () => {
             input.addEventListener('blur', () => {
                 const value = input.value;
                 if (value === '') {
-                    cell.innerHTML = original;
+                    cell.textContent = original;
                     cell.value = originalValue;
                 } else {
                     if (input.type === 'number') {
                         const parent = cell.parentNode;
                         if (cell.classList.contains('weightLbs')) {
                             const kgsCell = parent.querySelector('.weightKgs');
-                            kgsCell.innerHTML = (value / 2.2046).toFixed(0);
+                            kgsCell.textContent = (value / 2.2046).toFixed(0);
                             kgsCell.value = (value / 2.2046).toFixed(0);
                         } else if (cell.classList.contains('weightKgs')) {
                             const lbsCell = parent.querySelector('.weightLbs');
-                            lbsCell.innerHTML = (value * 2.2046).toFixed(0);
+                            lbsCell.textContent = (value * 2.2046).toFixed(0);
                             lbsCell.value = (value * 2.2046).toFixed(0);
                         }
-                        cell.innerHTML = value;
+                        cell.textContent = value;
                         cell.value = value;
                     } else if (input.type === 'date') {
                         const formattedDate = new Date(value).toLocaleDateString('en-US', {
@@ -358,7 +358,7 @@ workoutTable.addEventListener('click', () => {
                             timeZone: 'UTC'
                         });
 
-                        cell.innerHTML = formattedDate;
+                        cell.textContent = formattedDate;
                         cell.value = formattedDate;
                     }
                     // add a class to denote that the cell was changed
@@ -375,12 +375,12 @@ workoutTable.addEventListener('click', () => {
 
     if (lbsInput || kgsInput) {
         lbsInput.addEventListener('input', () => {
-            kgsInput.innerHTML = (lbsInput.value / 2.2046).toFixed(0);
+            kgsInput.textContent = (lbsInput.value / 2.2046).toFixed(0);
             kgsInput.value = (lbsInput.value / 2.2046).toFixed(0);
         });
 
         kgsInput.addEventListener('input', () => {
-            kgsInput.innerHTML = (kgsInput.value * 2.2046).toFixed(0);
+            kgsInput.textContent = (kgsInput.value * 2.2046).toFixed(0);
             lbsInput.value = (kgsInput.value * 2.2046).toFixed(0);
         });
     }
