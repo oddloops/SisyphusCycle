@@ -35,8 +35,8 @@
                         <input type="email" id="email" name="email" placeholder="Email Address" required>
                     </label>
                     <label for="sex">
-                        <select name="sex" id="sex">
-                            <option value="">Sex</option>
+                        <select id="sex" name="sex">
+                            <option value="" disabled selected>Sex</option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select><br>
@@ -50,6 +50,7 @@
                     <label for="inches">
                         <input type="number" id="inches" name="inches" placeholder="Inches" min="0" required>
                     </label>
+                    <div id="error-message"></div>
                     <div class="centered">
                         <button type="submit" id="signup-account">Sign Up</button>
                         <button type="button" id="to-login">Login</button>
