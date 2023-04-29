@@ -24,12 +24,18 @@ addRowId.addEventListener("click", () => {
         const buttons = newRow.insertCell(7);
 
         // allow input for exercise name
-        const exerciseInput = document.createElement("input");
+        // create a label
+        const exerciseLabel = document.createElement('label');
+        exerciseLabel.setAttribute('for', "exerciseName");
+        // create an input
+        const exerciseInput = document.createElement('input');
         exerciseInput.type = "text";
+        exerciseInput.id = "exerciseName";
         exerciseInput.name = "exerciseName";
-        exerciseInput.placeholder = "exercise name";
-        exerciseInput.required = true;
-        exercise.appendChild(exerciseInput);
+        exerciseInput.placeholder = "Exercise Name";
+        exerciseInput.setAttribute('required', true);
+        exerciseLabel.appendChild(exerciseInput);
+        exercise.appendChild(exerciseLabel);
 
         // create label for select
         const labelSelectBodypart = document.createElement("label");
