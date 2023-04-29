@@ -21,10 +21,6 @@ input:focus {
     box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
 }
 
-.centered {
-    text-align: center;
-}
-
 button:not([class="nav-button"]) {
     display: inline-block;
     outline: none;
@@ -62,4 +58,8 @@ form > *:last-child {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.centered {
+    text-align: center;
 }
