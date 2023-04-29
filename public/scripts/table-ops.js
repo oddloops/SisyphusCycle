@@ -48,6 +48,7 @@ addRowId.addEventListener("click", () => {
         const selectBodypart = document.createElement("select");
         selectBodypart.id = "bodySelect";
         selectBodypart.name = "bodySelect";
+        selectBodypart.placeholder = "Body Part";
         selectBodypart.required = true;
         
         // initial state
@@ -170,6 +171,7 @@ addRowId.addEventListener("click", () => {
         dateInput.id = "dateAchieved";
         dateInput.name = "dateAchieved";
         dateInput.type = "date";
+        dateInput.placeholder = "Date Achieved"
         dateInput.required = true;
         date.appendChild(dateInput);
 
@@ -204,12 +206,12 @@ workoutTable.addEventListener('click', () => {
         const inputs = row.querySelectorAll('input, select');
         const data = {};
         let inputsFilled = true;
-
+        
         // get all the inputted data
         inputs.forEach(input => {
             // check for empty inputs
             if (!input.value) {
-                alert(`Fill in missing field: ${input.name}`);
+                alert(`Fill in missing field: ${input.placeholder}`);
                 inputsFilled = false;
                 return;
             }
