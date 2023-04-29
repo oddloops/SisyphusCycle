@@ -24,11 +24,19 @@ addRowId.addEventListener("click", () => {
         const buttons = newRow.insertCell(7);
 
         // allow input for exercise name
-        const exerciseInput = document.createElement("input");
+        // create a label
+        const exerciseLabel = document.createElement('label');
+        exerciseLabel.setAttribute('for', 'exerciseName');
+        // create an input
+        const exerciseInput = document.createElement('input');
         exerciseInput.type = "text";
+        exerciseInput.id = "exerciseName";
         exerciseInput.name = "exerciseName";
-        exerciseInput.placeholder = "exercise name";
-        exerciseInput.required = true;
+        exerciseInput.placeholder = "Exercise Name";
+        exerciseInput.setAttribute('required', true);
+
+        // Add label and input
+        exercise.appendChild(exerciseLabel);
         exercise.appendChild(exerciseInput);
 
         // create label for select
@@ -38,95 +46,132 @@ addRowId.addEventListener("click", () => {
 
         // create select dropdown for body parts, 7 in total
         const selectBodypart = document.createElement("select");
+        selectBodypart.id = "bodySelect";
         selectBodypart.name = "bodySelect";
+        selectBodypart.placeholder = "Body Part";
         selectBodypart.required = true;
         
         // initial state
-        const option1 = document.createElement("option");
-        option1.value = "";
-        option1.text = "";
-        selectBodypart.appendChild(option1);
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.text = "Body Part";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        selectBodypart.appendChild(defaultOption);
 
         // Shoulders option
-        const option2 = document.createElement("option");
-        option2.value = "Shoulders";
-        option2.text = "Shoulders";
-        selectBodypart.appendChild(option2);
+        const option1 = document.createElement("option");
+        option1.value = "Shoulders";
+        option1.text = "Shoulders";
+        selectBodypart.appendChild(option1);
         
         // Chest option
-        const option3 = document.createElement("option");
-        option3.value = "Chest";
-        option3.text = "Chest";
-        selectBodypart.appendChild(option3);
+        const option2 = document.createElement("option");
+        option2.value = "Chest";
+        option2.text = "Chest";
+        selectBodypart.appendChild(option2);
 
         // Arms option
-        const option4 = document.createElement("option");
-        option4.value = "Arms";
-        option4.text = "Arms";
-        selectBodypart.appendChild(option4);
+        const option3 = document.createElement("option");
+        option3.value = "Arms";
+        option3.text = "Arms";
+        selectBodypart.appendChild(option3);
 
         // Abs option
-        const option5 = document.createElement("option");
-        option5.value = "Abs";
-        option5.text = "Abs";
-        selectBodypart.appendChild(option5);
+        const option4 = document.createElement("option");
+        option4.value = "Abs";
+        option4.text = "Abs";
+        selectBodypart.appendChild(option4);
 
         // Back option
-        const option6 = document.createElement("option");
-        option6.value = "Back";
-        option6.text = "Back";
-        selectBodypart.appendChild(option6);
+        const option5 = document.createElement("option");
+        option5.value = "Back";
+        option5.text = "Back";
+        selectBodypart.appendChild(option5);
 
         // Legs option
-        const option7 = document.createElement("option");
-        option7.value = "Legs";
-        option7.text = "Legs";
-        selectBodypart.appendChild(option7);
+        const option6 = document.createElement("option");
+        option6.value = "Legs";
+        option6.text = "Legs";
+        selectBodypart.appendChild(option6);
 
         partWorked.appendChild(selectBodypart);
 
         // allow input for weight (pounds)
+        // create label
+        const weightLbLabel = document.createElement("label");
+        weightLbLabel.setAttribute('for', 'weightLbs');
+
+        // create input
         const weightLbInput = document.createElement("input");
+        weightLbInput.id = "weightLbs";
         weightLbInput.name = "weightLbs";
         weightLbInput.type = "number";
         weightLbInput.classList.add("lbs");
-        weightLbInput.placeholder = "lbs lifted";
+        weightLbInput.placeholder = "lbs Lifted";
         weightLbInput.min = 0;
         weightLbInput.required = true;
+
+        weightPounds.appendChild(weightLbLabel);
         weightPounds.appendChild(weightLbInput);
 
         // allow input for weight (kilograms)
+        // create label
+        const weightKgLabel = document.createElement("label");
+        weightKgLabel.setAttribute('for', 'weightKgs');
+
+        // create Input
         const weightKgInput = document.createElement("input");
+        weightKgInput.id = "weightKgs";
         weightKgInput.name = "weightKgs";
         weightKgInput.type = "number";
         weightKgInput.classList.add("kgs");
-        weightKgInput.placeholder = "kgs lifted";
+        weightKgInput.placeholder = "kgs Lifted";
         weightKgInput.min = 0;
         weightKgInput.required = true;
+
+        weightKilograms.appendChild(weightKgLabel);
         weightKilograms.appendChild(weightKgInput);
 
         // allow input for rep count
+        // create label
+        const repsLabel = document.createElement("label");
+        repsLabel.setAttribute('for', 'repNum');
+
+        // create input
         const repsInput = document.createElement("input");
+        repsInput.id = "repNum";
         repsInput.name = "repNum";
         repsInput.type = "number";
-        repsInput.placeholder = "rep count";
+        repsInput.placeholder = "Rep Count";
         repsInput.min = 0;
         repsInput.required = true;
+        
+        repsAmount.appendChild(repsInput);
         repsAmount.appendChild(repsInput);
 
         // allow input for set count
+        // create label
+        const setsLabel = document.createElement("label");
+        setsLabel.setAttribute('for', 'setNum');
+
+        // create niput
         const setsInput = document.createElement("input");
+        setsInput.id = "setNum";
         setsInput.name = "setNum";
         setsInput.type = "number";
-        setsInput.placeholder = "set count";
+        setsInput.placeholder = "Set Count";
         setsInput.min = 0;
         setsInput.required = true;
+        sets.appendChild(setsLabel);
         sets.appendChild(setsInput);
 
         // allow input for data achieved
         const dateInput = document.createElement("input");
+        dateInput.id = "dateAchieved";
         dateInput.name = "dateAchieved";
         dateInput.type = "date";
+        dateInput.placeholder = "Date Achieved"
         dateInput.required = true;
         date.appendChild(dateInput);
 
@@ -161,12 +206,12 @@ workoutTable.addEventListener('click', () => {
         const inputs = row.querySelectorAll('input, select');
         const data = {};
         let inputsFilled = true;
-
+        
         // get all the inputted data
         inputs.forEach(input => {
             // check for empty inputs
             if (!input.value) {
-                alert(`Fill in missing field: ${input.name}`);
+                alert(`Fill in missing field: ${input.placeholder}`);
                 inputsFilled = false;
                 return;
             }
