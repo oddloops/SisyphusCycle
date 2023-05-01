@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title><%= username %></title>
+        <link rel="icon" type="image/png" href="/assets/effort.ico"/>
+        <link rel="stylesheet" type="text/css" href="/stylings/style.css">
+        <link rel="stylesheet" type="text/css" href="/stylings/account-styles.css">
+    </head>
+    <body>
+        <header class="page">
+        <h1>Sisyphus Cycle</h1>
+        <!-- Depending on user's state either show a login or logout button -->
+        <nav>
+            <ul>
+                <li><button type="button" id="home-btn" class="nav-button">Home</button></li>
+                <li><button type="button" id="history-btn" class="nav-button">History</button></li>
+                <li><button type="button" id="logout-btn" class="nav-button">Logout</button></li>
+            </ul>
+        </nav> 
+        </header>
+        <div class="account-page">
+            <main>
+                <ul>
+                    <li><strong>Username</strong>: <%= username %></li>
+                    <li><strong>Email</strong>: <%= userInfo.email %></li>
+                    <li><strong>Sex</strong>: <%= (userInfo.sex === 'M') ? 'Male' : 'Female'%></li>
+                    <li><strong>Weight</strong>: <%= userInfo.weight %> lbs</li>
+                    <li><strong>Height</strong>: <%= userInfo.feet %> Feet & <%= userInfo.inches %> inches</li>
+                </ul>
+            </main>
+        </div>
+    </body>
+    <footer class="credit">
+        <a href="https://www.flaticon.com/free-icons/effort" title="effort icons">Effort icons created by Paul J. - Flaticon</a>
+    </footer>
+    <script src="/scripts/main-page.js"></script>
+    <script src="/scripts/to-home.js"></script>
+</html>

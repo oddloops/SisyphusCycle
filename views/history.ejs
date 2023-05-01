@@ -14,20 +14,9 @@
       <!-- Depending on user's state either show a login or logout button -->
       <nav>
         <ul>
-            <li>
-              <% if (userId && username) { %>
-                <button type="button" id="home-btn" class="nav-button">Home</button>
-              <% } %>
-            </li>
-            <li>
-              <% if (userId && username) { %>
-                <form action="/logout" method="POST">
-                  <button id="logout-btn" class="nav-button">Logout</button>
-                </form>
-              <% } else { %>
-                <button type="button" id="login-btn" class="nav-button">Login</button>
-              <% } %> 
-            </li>
+            <li><button type="button" id="home-btn" class="nav-button">Home</button></li>
+            <li><button type="button" id="profile-btn" class="nav-button">Profile</button></li>
+            <li><button type="button" id="logout-btn" class="nav-button">Logout</button></li>
         </ul>
       </nav> 
     </header>
@@ -69,7 +58,7 @@
     <footer class="credit">
       <a href="https://www.flaticon.com/free-icons/effort" title="effort icons">Effort icons created by Paul J. - Flaticon</a>
     </footer>
-    <script src="../scripts/main-page.js"></script>
-    <script src="../scripts/to-home.js"></script>
+    <script src="/scripts/main-page.js"></script>
+    <script src="/scripts/to-home.js"></script>
   </body>
 </html>

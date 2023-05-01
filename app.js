@@ -79,6 +79,24 @@ app.get('/history', (req, res) => {
   }
 });
 
+// Route to profile page
+app.get('/profile', (req, res) => {
+  const userId = req.session.userId;
+  const username = req.session.username;
+
+  pool.query (
+    'SELECT * FROM users WHERE username = ?',
+    [username],
+    (err, result) => {
+      if (err) {
+        res.status().send("Error getting user data for profile");
+      } else {
+        res.render('profile', {userId, username, userInfo: result[0]} );
+      }
+    }
+  )
+});
+
 /* Handle users' sent data */
 // Handle login post request
 app.post('/login', (req, res) => {
@@ -119,11 +137,6 @@ app.post('/login', (req, res) => {
 // Handle signup post request
 app.post('/sign-up', (req, res) => {
     const {username, password, email, sex, weight, feet, inches} = req.body;
-
-    // Validate every field was filled
-    if (!username || !password || !email || !sex || !weight || !feet || !inches) {
-      return res.status(400).json({ message: "Missing fields." });
-    } 
 
     // Hash the password using bcrypt hash function
     const saltRounds = 12;
@@ -182,9 +195,10 @@ app.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error(err);
+      res.status(400).send('Error logging out');
     } else {
       res.clearCookie('connect.sid');
-      res.redirect('/')
+      res.status(200).send('Logout successful');
     }
   });
 });

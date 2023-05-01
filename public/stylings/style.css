@@ -33,16 +33,8 @@ nav ul {
     margin-right: 20px;
 }
 
-nav a {
-    text-decoration: none;
-    color: inherit;
-}
-
-nav a:hover {
-    color: #000000;
-}
-
 header.page {
+    height: 100px;
     justify-content: space-between;
     align-items: center;
     display: flex;
@@ -64,6 +56,7 @@ button {
 
 button.nav-button {
     padding: 10px;
+    margin-left: 5px;
     font-size: 18px;
     font-weight: bold;
     border-radius: 5px;

@@ -27,6 +27,12 @@ signupForm.addEventListener('submit', (event) => {
     const feet = feetInput.value;
     const inches = inchesInput.value;
 
+    // Validate every field was filled
+    if (!username || !password || !email || !sex || !weight || !feet || !inches) {
+      alert("Missing Field");
+      return;
+    } 
+
     fetch('/sign-up', {
         method: 'POST',
         headers: {
