@@ -14,16 +14,13 @@
       <!-- Depending on user's state either show a login or logout button -->
       <nav>
         <ul>
+            <% if (userId && username) { %>
+              <li><button type="button" id="history-btn" class="nav-button">History</button></li>
+              <li><button type="button" id="profile-btn" class="nav-button">Profile</button></li>
+            <% } %>
             <li>
               <% if (userId && username) { %>
-                <button type="button" id="history-btn" class="nav-button">History</button>
-              <% } %>
-            </li>
-            <li>
-              <% if (userId && username) { %>
-                <form action="/logout" method="POST">
-                  <button id="logout-btn" class="nav-button">Logout</button>
-                </form>
+                <button type="button" id="logout-btn" class="nav-button">Logout</button>
               <% } else { %>
                 <button type="button" id="login-btn" class="nav-button">Login</button>
               <% } %> 
