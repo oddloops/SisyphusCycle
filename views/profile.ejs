@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>User</title>
+        <title><%= username %></title>
         <link rel="icon" type="image/png" href="/assets/effort.ico"/>
         <link rel="stylesheet" type="text/css" href="/stylings/style.css">
         <link rel="stylesheet" type="text/css" href="/stylings/account-styles.css">
@@ -21,15 +21,19 @@
         </nav> 
         </header>
         <div class="account-page">
-            <h1>USERNAME</h1>
             <main>
-                
+                <h1><%= username %></h1>
+                <p>Email: <%= userInfo.email %></p>
+                <p>Sex: <%= (userInfo.sex === 'M') ? 'Male' : 'Female'%></p>
+                <p>Weight: <%= userInfo.weight %> lbs</p>
+                <p>Height: <%= userInfo.feet %> Feet & <%= userInfo.inches %> inches</p>
+
             </main>
         </div>
     </body>
     <footer class="credit">
         <a href="https://www.flaticon.com/free-icons/effort" title="effort icons">Effort icons created by Paul J. - Flaticon</a>
     </footer>
-    <script src="../scripts/main-page.js"></script>
-    <script src="../scripts/to-home.js"></script>
+    <script src="/scripts/main-page.js"></script>
+    <script src="/scripts/to-home.js"></script>
 </html>
