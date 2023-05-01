@@ -84,7 +84,17 @@ app.get('/profile', (req, res) => {
   const userId = req.session.userId;
   const username = req.session.username;
 
-  res.sendFile(path.join(__dirname, 'public', 'profile.html'));
+  pool.query (
+    'SELECT * FROM users WHERE username = ?',
+    [username],
+    (err, result) => {
+      if (err) {
+        res.status().send("Error getting user data for profile");
+      } else {
+        res.render('profile', {userId, username, userInfo: result[0]} );
+      }
+    }
+  )
 });
 
 /* Handle users' sent data */
