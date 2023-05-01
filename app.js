@@ -79,6 +79,14 @@ app.get('/history', (req, res) => {
   }
 });
 
+// Route to profile page
+app.get('/profile', (req, res) => {
+  const userId = req.session.userId;
+  const username = req.session.username;
+
+  res.sendFile(path.join(__dirname, 'public', 'profile.html'));
+});
+
 /* Handle users' sent data */
 // Handle login post request
 app.post('/login', (req, res) => {
@@ -182,9 +190,10 @@ app.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error(err);
+      res.status(400).send('Error logging out');
     } else {
       res.clearCookie('connect.sid');
-      res.redirect('/')
+      res.status(200).send('Logout successful');
     }
   });
 });
