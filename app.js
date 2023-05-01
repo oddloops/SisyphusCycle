@@ -138,11 +138,6 @@ app.post('/login', (req, res) => {
 app.post('/sign-up', (req, res) => {
     const {username, password, email, sex, weight, feet, inches} = req.body;
 
-    // Validate every field was filled
-    if (!username || !password || !email || !sex || !weight || !feet || !inches) {
-      return res.status(400).json({ message: "Missing fields." });
-    } 
-
     // Hash the password using bcrypt hash function
     const saltRounds = 12;
     
