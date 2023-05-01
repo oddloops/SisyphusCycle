@@ -1,5 +1,5 @@
 /* Style the input boxes (not including the submit form button) */
-input:not([type="submit"]), select {
+input {
     padding: 6px 12px;
     font-size: 16px;
     font-weight: 400;
