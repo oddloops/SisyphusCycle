@@ -7,6 +7,14 @@ if (loginButton) {
     });
 }
 
+const toSignUp = document.getElementById("to-signup");
+
+if (toSignUp) {
+    toSignUp.addEventListener('click', () => {
+        window.location.href = '/signup';
+    });
+}
+
 const logoutButton = document.getElementById("logout-btn");
 if (logoutButton) {
     logoutButton.addEventListener('click', () => {
@@ -23,6 +31,7 @@ if (logoutButton) {
                 window.location.href = '/';
             } else {
                 console.log("Something went wrong");
+                alert("Error Logging Out!");
             }
         })
         .catch(error => {
