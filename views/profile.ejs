@@ -22,12 +22,13 @@
         </header>
         <div class="account-page">
             <main>
-                <h1><%= username %></h1>
-                <p>Email: <%= userInfo.email %></p>
-                <p>Sex: <%= (userInfo.sex === 'M') ? 'Male' : 'Female'%></p>
-                <p>Weight: <%= userInfo.weight %> lbs</p>
-                <p>Height: <%= userInfo.feet %> Feet & <%= userInfo.inches %> inches</p>
-
+                <ul>
+                    <li><strong>Username</strong>: <%= username %></li>
+                    <li><strong>Email</strong>: <%= userInfo.email %></li>
+                    <li><strong>Sex</strong>: <%= (userInfo.sex === 'M') ? 'Male' : 'Female'%></li>
+                    <li><strong>Weight</strong>: <%= userInfo.weight %> lbs</li>
+                    <li><strong>Height</strong>: <%= userInfo.feet %> Feet & <%= userInfo.inches %> inches</li>
+                </ul>
             </main>
         </div>
     </body>
