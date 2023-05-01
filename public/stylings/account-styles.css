@@ -52,6 +52,11 @@ form > *:last-child {
     margin-bottom: 0;
 }
 
+ul {
+    list-style: none;
+    font-size: 30px;
+}
+
 #error-message {
     color: #ff0000;
 }
