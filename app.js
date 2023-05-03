@@ -101,17 +101,16 @@ app.get('/profile', (req, res) => {
 // Handle login post request
 app.post('/login', (req, res) => {
   const {username, password} = req.body;
-  
   // query user information
   pool.query(
-    'SELECT * FROM users WHERE username = ?',
-    [username],
+    'SELECT * FROM users WHERE username = ? OR email = ?',
+    [username, username],
     (err, result) => {
       if (err) {
         console.log(err);
         res.status(500).send('Error sending to database');
       } else if (result.length == 0) {
-        res.status(401).send('Wrong username');
+        res.status(401).send('Wrong username or email');
       } else {
         // compare the passwords 
         const hashedPassword = result[0].password;
