@@ -73,7 +73,7 @@ app.get('/history', (req, res) => {
 
   // if logged in then get data from table
   if (userId && username) {
-    getUserExercises(res, userId, username, 'exercise_history', 'history');
+    getUserExercises(res, userId, username, 'history', 'history');
   } else {
     res.render('history', { userId, username, rowData: null });
   }
@@ -236,7 +236,7 @@ app.post('/update-data', (req, res) => {
     
     // add the exercise data to exercise history before updating
     pool.query(
-      `INSERT INTO exercise_history (user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved)
+      `INSERT INTO history (user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved)
       SELECT user_id, exercise_name, part_worked, weight_lbs, weight_kgs, reps, sets, date_achieved
       FROM exercises
       WHERE user_id = ? AND exercise_name = ?`,
@@ -280,7 +280,7 @@ app.delete('/deleteRow', (req, res) => {
         res.status(500).send('Error deleting data');
       } else {
         pool.query(
-          'DELETE FROM exercise_history WHERE user_id = ? AND exercise_name = ?',
+          'DELETE FROM history WHERE user_id = ? AND exercise_name = ?',
           [user, exercise_name],
           (error) => {
             if (error) {
