@@ -120,9 +120,11 @@ app.post('/login', (req, res) => {
           } else if(!match) {
             res.status(401).send('Wrong password');
           } else {
+            const queryResult = result[0];
+
             // save user id and username to current session
-            req.session.userId = result[0].id;
-            req.session.username = username;
+            req.session.userId = queryResult.id;
+            req.session.username = queryResult.username;
 
             // go back to home page
             res.status(200).send('Login successful');
