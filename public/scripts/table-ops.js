@@ -9,6 +9,7 @@ let addRowClicked = false;
 
 // add eventListener when the button is clicked to add a row
 addRowId.addEventListener("click", () => {
+    // button wasn't clicked
     if (!addRowClicked) {
         // adds a row to the bottom of the table
         const newRow = workoutTable.insertRow(-1);
@@ -340,6 +341,7 @@ workoutTable.addEventListener('click', () => {
                 });
             }
         } else {
+            addRowClicked = false;
             row.remove();
         }
     }
