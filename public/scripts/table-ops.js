@@ -192,6 +192,20 @@ addRowId.addEventListener("click", () => {
         // set flag to prevent excess clicking
         addRowClicked = true;
 
+        // add eventlisteners to auto convert lb -> kg and vice versa
+        const lbsInput = document.getElementById('weightLbs');
+        const kgsInput = document.getElementById('weightKgs');
+
+        lbsInput.addEventListener('input', () => {
+            kgsInput.textContent = (lbsInput.value / 2.2046).toFixed(0);
+            kgsInput.value = (lbsInput.value / 2.2046).toFixed(0);
+        });
+
+        kgsInput.addEventListener('input', () => {
+            kgsInput.textContent = (kgsInput.value * 2.2046).toFixed(0);
+            lbsInput.value = (kgsInput.value * 2.2046).toFixed(0);
+        });
+
         // focus onto the first cell of row (exercise name)
         exerciseInput.focus();
     }
@@ -414,21 +428,5 @@ workoutTable.addEventListener('click', () => {
                 input.remove();
             }); 
         }
-    }
-
-    // to auto convert lb -> kg and vice versa
-    const lbsInput = row.querySelector(".lbs");
-    const kgsInput = row.querySelector(".kgs");
-
-    if (lbsInput || kgsInput) {
-        lbsInput.addEventListener('input', () => {
-            kgsInput.textContent = (lbsInput.value / 2.2046).toFixed(0);
-            kgsInput.value = (lbsInput.value / 2.2046).toFixed(0);
-        });
-
-        kgsInput.addEventListener('input', () => {
-            kgsInput.textContent = (kgsInput.value * 2.2046).toFixed(0);
-            lbsInput.value = (kgsInput.value * 2.2046).toFixed(0);
-        });
     }
 });
