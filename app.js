@@ -5,6 +5,7 @@ const pool = require('./src/database/db-connection');
 const session = require('express-session');
 const path = require('path');
 
+// define hosting
 const hostname = '127.0.0.1';
 const PORT = process.env.PORT || 3000;
 
