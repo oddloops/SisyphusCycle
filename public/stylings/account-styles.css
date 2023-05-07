@@ -57,6 +57,20 @@ ul {
     font-size: 30px;
 }
 
+#del-account-btn {
+    margin-right: 100px;
+    border: none;
+    text-decoration: none;
+    background: inherit;
+    color: #AC2020;
+    float: right;
+}
+
+#del-account-btn:hover {
+    text-decoration: underline;
+    color: #671111;
+}
+
 #error-message {
     color: #ff0000;
 }
@@ -67,8 +81,4 @@ ul {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.centered {
-    text-align: center;
 }
