@@ -20,8 +20,8 @@
             </ul>
         </nav> 
         </header>
-        <div class="account-page">
-            <main>
+        <div>
+            <main class="account-page">
                 <ul>
                     <li><strong>Username</strong>: <%= username %></li>
                     <li><strong>Email</strong>: <%= userInfo.email %></li>
@@ -30,6 +30,7 @@
                     <li><strong>Height</strong>: <%= userInfo.feet %> Feet & <%= userInfo.inches %> inches</li>
                 </ul>
             </main>
+            <button type="button" id="del-account-btn">Delete Account?!</button>
         </div>
     </body>
     <footer class="credit">
