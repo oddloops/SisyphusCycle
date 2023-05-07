@@ -300,6 +300,54 @@ app.delete('/deleteRow', (req, res) => {
   );
 });
 
+// handle account deletion request
+app.delete('/delAccount', (req, res) => {
+  const user = req.session.userId;
+  // delete exercises related to the user
+  pool.query(
+    'DELETE FROM exercises WHERE user_id = ?',
+    [user],
+    (error) => {
+      if (error) {
+        console.error(error);
+        res.status(500).send('Error deleting exercises');
+      } else {
+        // delete user and user data
+        pool.query(
+          'DELETE FROM history WHERE user_id = ?',
+          [user],
+          (error) => {
+            if (error) {
+              console.error(error);
+              res.status(500).send('Error deleting user data');
+            } else {
+              pool.query(
+                'DELETE FROM users WHERE id = ?',
+                [user],
+                (error) => {
+                  if (error) {
+                    console.error(error);
+                    res.status(500).send('Error deleting user');
+                  } else {
+                    req.session.destroy((error) => {
+                      if (error) {
+                        console.error(error);
+                      }
+                      console.log(`Deleted user: ${user}`);
+                      res.status(200).send(`Deleted user: ${user}`);
+                    });
+                  }
+                }
+              );
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+
 // Starts the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
